@@ -21,6 +21,10 @@ class App extends React.Component {
     });
   };
 
+  logout = () => {
+    fire.auth().signOut();
+  };
+
   getProducts = () => {
     axios
       .get("https://spamazon-ga-backend.herokuapp.com/api/products")
@@ -39,7 +43,11 @@ class App extends React.Component {
   render = () => {
     return (
       <div>
-        {this.state.user ? <h4> You are logged in! </h4> : <Users />}
+        {this.state.user ? (
+          <button onClick={this.logout}>Log out </button>
+        ) : (
+          <Users />
+        )}
 
         <h1>Spamazon's black market (keep secret)</h1>
         {this.state.products.map((item) => {
