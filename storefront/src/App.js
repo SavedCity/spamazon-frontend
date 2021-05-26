@@ -1,16 +1,18 @@
 import React from "react";
 import Products from "./components/Products";
-import Users from "./components/Users";
+import SignIn from "./components/SignIn";
 import fire from "./config/fire";
-import AddForm from './components/AddForm'
+import AddForm from "./components/AddForm";
+import Nav from "./components/Nav";
 import axios from "axios";
 
 class App extends React.Component {
   state = {
     products: [],
-    users: {},
+    user: {},
   };
 
+  // AUTHENTICATION
   authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -21,22 +23,23 @@ class App extends React.Component {
     });
   };
 
-  logout = () => {
+  logOut = () => {
     fire.auth().signOut();
   };
- handleChange = (event) => {
-     this.setState({
-         [event.target.id] : event.target.value
-     })
- }
- addProduct = (product) => {
-        axios.post("https://spamazon-ga-backend.herokuapp.com/api/products", product)
-        .then (
-            (response) => {
-                this.getProducts()
-            }
-        )
-    }
+  handleChange = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value,
+    });
+  };
+  addProduct = (product) => {
+    axios
+      .post("https://spamazon-ga-backend.herokuapp.com/api/products", product)
+      .then((response) => {
+        this.getProducts();
+      });
+  };
+
+  // PRODUCTS
   getProducts = () => {
     axios
       .get("https://spamazon-ga-backend.herokuapp.com/api/products")
@@ -55,20 +58,22 @@ class App extends React.Component {
   render = () => {
     return (
       <div>
-        {this.state.user ? (
-          <button onClick={this.logout}>Log out </button>
-        ) : (
-          <Users />
-        )}
-
+        <Nav user={this.state.user} logOut={this.logOut} />
         <h1>Spamazon's black market (keep secret)</h1>
+
+        {this.state.user ? (
+          <AddForm
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            addProduct={this.addProduct}
+            user={this.state.user}
+          />
+        ) : null}
+
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
               <Products item={item} />
-              <AddForm handleSubmit={this.handleSubmit}
-              handleChange={this.handleChange}
-              addProduct={this.addProduct}/>
             </div>
           );
         })}
