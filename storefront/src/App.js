@@ -2,7 +2,7 @@ import React from "react";
 import Products from "./components/Products";
 import Users from "./components/Users";
 import fire from "./config/fire";
-
+import AddForm from './components/AddForm'
 import axios from "axios";
 
 class App extends React.Component {
@@ -24,7 +24,19 @@ class App extends React.Component {
   logout = () => {
     fire.auth().signOut();
   };
-
+ handleChange = (event) => {
+     this.setState({
+         [event.target.id] : event.target.value
+     })
+ }
+ addProduct = (product) => {
+        axios.post("https://spamazon-ga-backend.herokuapp.com/api/products", product)
+        .then (
+            (response) => {
+                this.getProducts()
+            }
+        )
+    }
   getProducts = () => {
     axios
       .get("https://spamazon-ga-backend.herokuapp.com/api/products")
@@ -54,6 +66,9 @@ class App extends React.Component {
           return (
             <div key={item.id}>
               <Products item={item} />
+              <AddForm handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+              addProduct={this.addProduct}/>
             </div>
           );
         })}
