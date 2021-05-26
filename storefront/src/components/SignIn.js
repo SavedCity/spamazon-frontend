@@ -1,41 +1,27 @@
 import React from "react";
+import SignUp from "./SignUp";
 import fire from "../config/fire";
 
-class Users extends React.Component {
+class SignIn extends React.Component {
   state = {
     email: "",
     password: "",
   };
-
-  // AUTHENTICATION
 
   login = (event) => {
     event.preventDefault();
     fire
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((u) => {
-        console.log(u);
+      .then((user) => {
+        console.log(user);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  signUp = (event) => {
-    event.preventDefault();
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((u) => {
-        console.log(u);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  handleChange = (event) => {
+  handleSignInChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -44,6 +30,7 @@ class Users extends React.Component {
   render() {
     return (
       <div>
+        <h3>Log In</h3>
         <form>
           <label htmlFor="email"> Email </label>
           <input
@@ -51,7 +38,7 @@ class Users extends React.Component {
             type="text"
             id="email"
             placeholder="Enter email"
-            onChange={this.handleChange}
+            onChange={this.handleSignInChange}
             value={this.state.email}
           />
           <br />
@@ -61,16 +48,16 @@ class Users extends React.Component {
             type="password"
             id="password"
             placeholder="Enter password"
-            onChange={this.handleChange}
+            onChange={this.handleSignInChange}
             value={this.state.password}
           />
           <br />
           <button onClick={this.login}> Login </button>
-          <button onClick={this.signUp}> Sign Up </button>
         </form>
+        <SignUp />
       </div>
     );
   }
 }
 
-export default Users;
+export default SignIn;

@@ -4,6 +4,7 @@ class ViewProduct extends React.Component {
   render() {
     return (
       <div>
+        <h2> By {this.props.item.created_by} </h2>
         <h2> Name: {this.props.item.name} </h2>
         <img src={this.props.item.image} />
         <h4> Price: {this.props.item.price} </h4>
