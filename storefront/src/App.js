@@ -1,14 +1,21 @@
 import React from "react";
 import Products from "./components/Products";
+<<<<<<< HEAD
+import AddForm from './components/AddForm'
+=======
 import SignIn from "./components/SignIn";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
+>>>>>>> 8e1cfaaa424224b6567e084863260068b149700e
 import axios from "axios";
+import Edit from "./components/Edit"
 
 class App extends React.Component {
   state = {
     products: [],
+<<<<<<< HEAD
+=======
     user: {},
   };
 
@@ -25,6 +32,7 @@ class App extends React.Component {
 
   logOut = () => {
     fire.auth().signOut();
+>>>>>>> 8e1cfaaa424224b6567e084863260068b149700e
   };
   handleChange = (event) => {
     this.setState({
@@ -49,7 +57,15 @@ class App extends React.Component {
       )
       .catch((error) => console.error(error));
   };
+  updateProduct = (event, product) => {
+      event.preventDefault()
+      const id = event.target.id
 
+      axios.put("https://spamazon-ga-backend.herokuapp.com/api/products/"+id,
+  product).then((response) => {
+      this.getProducts()
+  })
+  }
   componentDidMount = () => {
     this.getProducts();
     this.authListener();
@@ -58,6 +74,9 @@ class App extends React.Component {
   render = () => {
     return (
       <div>
+<<<<<<< HEAD
+        <h1>Spamazon's black market (keep secret)</h1>
+=======
         <Nav user={this.state.user} logOut={this.logOut} />
         <h1>Spamazon's black market (keep secret)</h1>
 
@@ -70,10 +89,21 @@ class App extends React.Component {
           />
         ) : null}
 
+>>>>>>> 8e1cfaaa424224b6567e084863260068b149700e
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
               <Products item={item} />
+<<<<<<< HEAD
+              <details>
+              <summary>Edit</summary>
+              <Edit products = {item} updateProduct = {this.updateProduct}></Edit>
+              </details>
+              <AddForm handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+              addProduct={this.addProduct}/>
+=======
+>>>>>>> 8e1cfaaa424224b6567e084863260068b149700e
             </div>
           );
         })}
