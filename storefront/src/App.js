@@ -5,6 +5,7 @@ import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
 import axios from "axios";
+import Edit from "./components/Edit"
 
 class App extends React.Component {
   state = {
@@ -49,7 +50,15 @@ class App extends React.Component {
       )
       .catch((error) => console.error(error));
   };
+  updateProduct = (event, product) => {
+      event.preventDefault()
+      const id = event.target.id
 
+      axios.put("https://spamazon-ga-backend.herokuapp.com/api/products/"+id,
+  product).then((response) => {
+      this.getProducts()
+  })
+  }
   componentDidMount = () => {
     this.getProducts();
     this.authListener();
@@ -74,6 +83,13 @@ class App extends React.Component {
           return (
             <div key={item.id}>
               <Products item={item} />
+              <details>
+              <summary>Edit</summary>
+              <Edit products = {item} updateProduct = {this.updateProduct}></Edit>
+              </details>
+              <AddForm handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+              addProduct={this.addProduct}/>
             </div>
           );
         })}
