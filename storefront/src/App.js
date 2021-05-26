@@ -1,20 +1,29 @@
 import React from "react";
 import Products from "./components/Products";
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 0556b2d1ddbc321a0ebfbe2faee32a1bbb01e1de
 import SignIn from "./components/SignIn";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0556b2d1ddbc321a0ebfbe2faee32a1bbb01e1de
 import axios from "axios";
 import Edit from "./components/Edit"
 
 class App extends React.Component {
   state = {
     products: [],
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0556b2d1ddbc321a0ebfbe2faee32a1bbb01e1de
     user: {},
   };
 
@@ -31,7 +40,10 @@ class App extends React.Component {
 
   logOut = () => {
     fire.auth().signOut();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0556b2d1ddbc321a0ebfbe2faee32a1bbb01e1de
   };
   handleChange = (event) => {
     this.setState({
@@ -73,9 +85,12 @@ class App extends React.Component {
   render = () => {
     return (
       <div>
+<<<<<<< HEAD
 
         <h1>Spamazon's black market (keep secret)</h1>
 
+=======
+>>>>>>> 0556b2d1ddbc321a0ebfbe2faee32a1bbb01e1de
         <Nav user={this.state.user} logOut={this.logOut} />
         <h1>Spamazon's black market (keep secret)</h1>
 
@@ -88,11 +103,18 @@ class App extends React.Component {
           />
         ) : null}
 
+<<<<<<< HEAD
 
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
 
+=======
+        {this.state.products.map((item) => {
+          return (
+            <div key={item.id}>
+              <Products item={item} />
+>>>>>>> 0556b2d1ddbc321a0ebfbe2faee32a1bbb01e1de
               <details>
               <summary>Edit</summary>
               <Edit products = {item} updateProduct = {this.updateProduct}></Edit>
@@ -100,8 +122,11 @@ class App extends React.Component {
               <AddForm handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
               addProduct={this.addProduct}/>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0556b2d1ddbc321a0ebfbe2faee32a1bbb01e1de
             </div>
           );
         })}

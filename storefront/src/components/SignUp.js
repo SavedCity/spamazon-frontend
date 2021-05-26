@@ -32,27 +32,27 @@ class SignUp extends React.Component {
       <div>
         <h3>Sign Up</h3>
         <form>
-          <label htmlFor="email"> Email </label>
-          <input
-            name="email"
-            type="text"
-            id="signup-email"
-            placeholder="Enter email"
-            onChange={this.handleSignUpChange}
-            value={this.state.email}
-          />
-          <br />
-          <label htmlFor="password"> Password </label>
-          <input
-            name="password"
-            type="password"
-            id="signup-password"
-            placeholder="Enter password"
-            onChange={this.handleSignUpChange}
-            value={this.state.password}
-          />
-          <br />
-          <button onClick={this.signUp}> Sign Up </button>
+          <div className="signup-form">
+            <label htmlFor="email"> Email </label>
+            <input
+              name="email"
+              type="text"
+              id="signup-email"
+              placeholder="Enter email"
+              onChange={this.handleSignUpChange}
+              value={this.state.email}
+            />
+            <label htmlFor="password"> Password </label>
+            <input
+              name="password"
+              type="password"
+              id="signup-password"
+              placeholder="Enter password"
+              onChange={this.handleSignUpChange}
+              value={this.state.password}
+            />
+            <button onClick={this.signUp}> Sign Up </button>
+          </div>
         </form>
       </div>
     );
