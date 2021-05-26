@@ -60,7 +60,7 @@ class App extends React.Component {
   updateProduct = (event, product) => {
       event.preventDefault()
       const id = event.target.id
-      
+
       axios.put("https://spamazon-ga-backend.herokuapp.com/api/products/"+id,
   product).then((response) => {
       this.getProducts()
@@ -68,6 +68,7 @@ class App extends React.Component {
   }
   componentDidMount = () => {
     this.getProducts();
+    this.authListener();
   };
 
   render = () => {
