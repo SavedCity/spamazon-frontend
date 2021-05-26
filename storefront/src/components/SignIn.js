@@ -27,34 +27,70 @@ class SignIn extends React.Component {
     });
   };
 
+  // SIGN IN MODAL
+  openModal = () => {
+    let modal = document.getElementById("signin-modal");
+    modal.style.display = "block";
+  };
+
+  closeModal = () => {
+    let modal = document.getElementById("signin-modal");
+    modal.style.display = "none";
+  };
+
+  closeModalWindow = (event) => {
+    let modal = document.getElementById("signin-modal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
   render() {
     return (
-      <div>
-        <h3>Log In</h3>
-        <form>
-          <label htmlFor="email"> Email </label>
-          <input
-            name="email"
-            type="text"
-            id="email"
-            placeholder="Enter email"
-            onChange={this.handleSignInChange}
-            value={this.state.email}
-          />
-          <br />
-          <label htmlFor="password"> Password </label>
-          <input
-            name="password"
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            onChange={this.handleSignInChange}
-            value={this.state.password}
-          />
-          <br />
-          <button onClick={this.login}> Login </button>
-        </form>
-        <SignUp />
+      <div onClick={this.closeModalWindow}>
+        <button onClick={this.openModal} id="signin-button">
+          Log In
+        </button>
+
+        <div id="signin-modal">
+          <span onClick={this.closeModal} className="signin-close">
+            X
+          </span>
+
+          <div className="signin-content">
+            <form>
+              <div className="fontuser">
+                <label htmlFor="email">Email </label>
+                <input
+                  name="email"
+                  type="text"
+                  id="email"
+                  placeholder="Enter email"
+                  onChange={this.handleSignInChange}
+                  value={this.state.email}
+                />
+                <i className="fas fa-user"></i>
+              </div>
+
+              <div className="fontpass">
+                <label htmlFor="password">Password </label>
+                <input
+                  name="password"
+                  type="password"
+                  id="password"
+                  placeholder="Enter password"
+                  onChange={this.handleSignInChange}
+                  value={this.state.password}
+                />
+                <i className="fas fa-lock"></i>
+              </div>
+
+              <button onClick={this.login}> Login </button>
+            </form>
+
+            <SignUp />
+          </div>
+        </div>
       </div>
     );
   }
