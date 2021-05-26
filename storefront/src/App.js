@@ -1,28 +1,12 @@
 import React from "react";
 import Products from "./components/Products";
-import Users from "./components/Users";
-import fire from "./config/fire";
 import AddForm from './components/AddForm'
 import axios from "axios";
+import Edit from "./components/Edit"
 
 class App extends React.Component {
   state = {
     products: [],
-    users: {},
-  };
-
-  authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      } else {
-        this.setState({ user: null });
-      }
-    });
-  };
-
-  logout = () => {
-    fire.auth().signOut();
   };
  handleChange = (event) => {
      this.setState({
@@ -46,26 +30,31 @@ class App extends React.Component {
       )
       .catch((error) => console.error(error));
   };
-
+  updateProduct = (event, product) => {
+      event.preventDefault()
+      const id = event.target.id
+      
+      axios.put("https://spamazon-ga-backend.herokuapp.com/api/products/"+id,
+  product).then((response) => {
+      this.getProducts()
+  })
+  }
   componentDidMount = () => {
     this.getProducts();
-    this.authListener();
   };
 
   render = () => {
     return (
       <div>
-        {this.state.user ? (
-          <button onClick={this.logout}>Log out </button>
-        ) : (
-          <Users />
-        )}
-
         <h1>Spamazon's black market (keep secret)</h1>
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
               <Products item={item} />
+              <details>
+              <summary>Edit</summary>
+              <Edit products = {item} updateProduct = {this.updateProduct}></Edit>
+              </details>
               <AddForm handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
               addProduct={this.addProduct}/>
