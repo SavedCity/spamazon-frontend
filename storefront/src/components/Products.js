@@ -1,10 +1,6 @@
 import React from "react";
 import Edit from "./Edit";
 
-// import ViewProduct from "./ViewProduct";
-import {Link} from 'react-router-dom';
-import ViewProduct from './ViewProduct';
-
 class Products extends React.Component {
   addToCart = () => {};
 

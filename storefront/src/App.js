@@ -1,6 +1,5 @@
 import React from "react";
 import Products from "./components/Products";
-import ViewProduct from "./components/ViewProduct";
 import SignIn from "./components/SignIn";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
@@ -75,8 +74,6 @@ class App extends React.Component {
 
   render = () => {
     return (
-      <Router>
-
         <div>
           <Nav user={this.state.user} logOut={this.logOut} />
           <h1>Spamazon's black market (keep secret)</h1>
