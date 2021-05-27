@@ -10,27 +10,55 @@ body {
   display: flex;
   width: 100%;
   background: #000;
-  padding: 15px 10px;
+  padding: 5px 10px;
   position: fixed;
   top: 0;
 }
 
-/* ========================== SIGN IN ========================== */
+.title {
+  color: white;
+}
+
+.fa-shopping-cart {
+  color: #fff;
+  font-size: 30px;
+  right: 30px;
+  position: fixed;
+  top: 19px;
+}
+
+.logout {
+  border: none;
+  background: #9d0208;
+  color: white;
+  padding: 7px;
+  font-size: 20px;
+  border-radius: 2px;
+  cursor: pointer;
+  position: fixed;
+  right: 100px;
+  top: 15px;
+}
 
 #signin-button {
   border: none;
   background: #0077b6;
   color: white;
-  padding: 5px;
+  padding: 7px;
   font-size: 20px;
   border-radius: 2px;
   cursor: pointer;
+  position: fixed;
+  right: 100px;
+  top: 15px;
 }
 
 #signin-button:hover {
   background: #48cae4;
   color: black;
 }
+
+/* ========================== SIGN IN ========================== */
 
 #signin-modal {
   display: none;
@@ -109,13 +137,6 @@ body {
 }
 
 /* =========================== SHOPPING CART =========================== */
-
-.fa-shopping-cart {
-  color: #fff;
-  font-size: 30px;
-  right: 20px;
-  position: fixed;
-}
 
 /* =========================== PRODUCTS =========================== */
 
