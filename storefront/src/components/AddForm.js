@@ -49,7 +49,7 @@ export default class AddForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className= 'create'>
         <h1> add a product!</h1>
         <form id="form" onSubmit={this.handleSubmit}>
           <label htmlFor="name"> Name </label>
