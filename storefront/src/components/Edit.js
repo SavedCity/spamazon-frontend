@@ -19,6 +19,16 @@ export default class Edit extends Component {
       [event.target.id]: parseInt(event.target.value),
     });
   };
+
+  // handleImageChange = (event) => {
+  //   this.setState({
+  //     [event.target.id]: event.target.value,
+  //   });
+  //   let image = document.getElementById("form-edit-image");
+  //
+  //   image.src = event.target.value;
+  // };
+
   handleSubmit = (event) => {
     event.preventDefault();
 
@@ -27,63 +37,77 @@ export default class Edit extends Component {
   render() {
     return (
       <div>
-        <form id={this.props.item.id} onSubmit={this.handleSubmit}>
-          <label htmlFor=""> Name </label>
-          <input
-            title="Must be between 5-64 characters long"
-            required
-            pattern="[a-zA-Z\W]{5,64}"
-            type="text"
-            id="name"
-            onChange={this.handleChange}
-            value={this.state.name}
-          />
+        {this.props.user.email === this.props.item.created_by ? (
+          <details>
+            <summary>Edit</summary>
+            <form id={this.props.item.id} onSubmit={this.handleSubmit}>
+              <label htmlFor=""> Name </label>
+              <input
+                title="Must be between 5-64 characters long"
+                required
+                pattern="[a-zA-Z\W]{5,64}"
+                type="text"
+                id="name"
+                onChange={this.handleChange}
+                value={this.state.name}
+              />
 
-          <label htmlFor=""> Price </label>
-          <input
-            min="0"
-            max="999999999"
-            required
-            type="number"
-            id="price"
-            onChange={this.handleChangeNumbers}
-            value={this.state.price}
-          />
+              <label htmlFor=""> Price </label>
+              <input
+                min="0"
+                max="999999999"
+                required
+                type="number"
+                id="price"
+                onChange={this.handleChangeNumbers}
+                value={this.state.price}
+              />
 
-          <label htmlFor=""> Description </label>
-          <input
-            title="Length must not exceed 300 characters"
-            pattern="[a-zA-Z\W]{0,300}"
-            type="text"
-            id="description"
-            onChange={this.handleChange}
-            value={this.state.description}
-          />
+              <label htmlFor=""> Description </label>
+              <input
+                title="Length must not exceed 300 characters"
+                pattern="[a-zA-Z\W]{0,300}"
+                type="text"
+                id="description"
+                onChange={this.handleChange}
+                value={this.state.description}
+              />
 
-          <label htmlFor=""> Image </label>
-          <input
-            type="text"
-            id="image"
-            onChange={this.handleChange}
-            value={this.state.image}
-          />
+              <label htmlFor=""> Image </label>
+              <input
+                type="text"
+                id="image"
+                onChange={this.handleChange}
+                value={this.state.image}
+              />
 
-          <label htmlFor=""> Stock </label>
-          <input
-            min="0"
-            max="1000"
-            required
-            type="number"
-            id="stock"
-            onChange={this.handleChangeNumbers}
-            value={this.state.stock}
-          />
+              <label htmlFor=""> Stock </label>
+              <input
+                min="0"
+                max="1000"
+                required
+                type="number"
+                id="stock"
+                onChange={this.handleChangeNumbers}
+                value={this.state.stock}
+              />
 
-          <input type="hidden" id="created_by" value={this.state.created_by} />
+              <input
+                type="hidden"
+                id="created_by"
+                value={this.state.created_by}
+              />
 
-          <input type="submit" value="edit Item" />
-          <button value = {this.props.item.id} onClick={this.props.deleteProduct}>Delete</button>
-        </form>
+              <input type="submit" value="edit Item" />
+              <button
+                value={this.props.item.id}
+                onClick={this.props.deleteProduct}
+              >
+                Delete
+              </button>
+            </form>
+          </details>
+        ) : null}
       </div>
     );
   }

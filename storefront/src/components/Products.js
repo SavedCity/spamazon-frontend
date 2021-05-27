@@ -18,15 +18,14 @@ class Products extends React.Component {
 
         <h2> Price: {this.props.item.price} </h2>
 
-        <details>
-          <summary>Edit</summary>
+        {this.props.user ? (
           <Edit
             user={this.props.user}
             item={this.props.item}
             updateProduct={this.props.updateProduct}
             deleteProduct={this.props.deleteProduct}
           ></Edit>
-        </details>
+        ) : null}
 
         {this.props.user ? <button> Add to cart </button> : null}
       </div>
