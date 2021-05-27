@@ -10,6 +10,8 @@ class Nav extends React.Component {
         ) : (
           <SignIn />
         )}
+
+        <i className="fas fa-shopping-cart"></i>
       </div>
     );
   }

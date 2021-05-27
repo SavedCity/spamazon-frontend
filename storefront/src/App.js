@@ -5,7 +5,6 @@ import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
 import axios from "axios";
-import Edit from "./components/Edit"
 
 class App extends React.Component {
   state = {
@@ -51,14 +50,18 @@ class App extends React.Component {
       .catch((error) => console.error(error));
   };
   updateProduct = (event, product) => {
-      event.preventDefault()
-      const id = event.target.id
+    event.preventDefault();
+    const id = event.target.id;
 
-      axios.put("https://spamazon-ga-backend.herokuapp.com/api/products/"+id,
-  product).then((response) => {
-      this.getProducts()
-  })
-  }
+    axios
+      .put(
+        "https://spamazon-ga-backend.herokuapp.com/api/products/" + id,
+        product
+      )
+      .then((response) => {
+        this.getProducts();
+      });
+  };
   componentDidMount = () => {
     this.getProducts();
   };
@@ -81,7 +84,11 @@ class App extends React.Component {
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
+<<<<<<< HEAD
               <Products item={item} />
+=======
+              <Products item={item} user={this.state.user} />
+>>>>>>> dcbdbdde70393b2ffe333452ee54dcf6df39c281
             </div>
           );
         })}

@@ -53,14 +53,15 @@ class SignIn extends React.Component {
         </button>
 
         <div id="signin-modal">
-          <span onClick={this.closeModal} className="signin-close">
-            X
-          </span>
-
           <div className="signin-content">
             <form>
+              <span onClick={this.closeModal} className="signin-close">
+                X
+              </span>
               <div className="fontuser">
-                <label htmlFor="email">Email </label>
+                <label className="email-title" htmlFor="">
+                  Email{" "}
+                </label>
                 <input
                   name="email"
                   type="text"
@@ -73,7 +74,7 @@ class SignIn extends React.Component {
               </div>
 
               <div className="fontpass">
-                <label htmlFor="password">Password </label>
+                <label htmlFor="">Password </label>
                 <input
                   name="password"
                   type="password"
