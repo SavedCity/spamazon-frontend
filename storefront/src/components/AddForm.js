@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import fire from "../config/fire";
+
 export default class AddForm extends Component {
   state = {
     name: "",
@@ -22,16 +24,34 @@ export default class AddForm extends Component {
     });
   };
 
+  handleImageChange = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value,
+    });
+    let image = document.getElementById("form-image");
+
+    image.src = event.target.value;
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addProduct(this.state);
+    this.setState({
+      name: "",
+      price: "",
+      description: "",
+      image: "",
+      stock: "",
+      created_by: "",
+    });
+    document.getElementById("form-image").src = "";
   };
 
   render() {
     return (
       <div>
         <h1> add a product!</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form id="form" onSubmit={this.handleSubmit}>
           <label htmlFor="name"> Name </label>
           <input
             type="text"
@@ -39,6 +59,7 @@ export default class AddForm extends Component {
             onChange={this.handleChange}
             value={this.state.name}
           />
+
           <label htmlFor="price"> Price </label>
           <input
             type="number"
@@ -46,6 +67,7 @@ export default class AddForm extends Component {
             onChange={this.handleChangeNumbers}
             value={this.state.price}
           />
+
           <label htmlFor="description"> Description </label>
           <input
             type="text"
@@ -53,13 +75,16 @@ export default class AddForm extends Component {
             onChange={this.handleChange}
             value={this.state.description}
           />
+
           <label htmlFor="image"> Image </label>
           <input
             type="text"
             id="image"
-            onChange={this.handleChange}
+            onChange={this.handleImageChange}
             value={this.state.image}
           />
+          <img src="" id="form-image" />
+
           <label htmlFor="stock"> Stock </label>
           <input
             type="number"
@@ -69,6 +94,7 @@ export default class AddForm extends Component {
           />
 
           <input type="hidden" id="created_by" value={this.state.created_by} />
+
           <input type="submit" value="Upload Item" />
         </form>
       </div>
