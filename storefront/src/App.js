@@ -62,9 +62,14 @@ class App extends React.Component {
         this.getProducts();
       });
   };
+  deleteProduct = (event) => {
+      axios.delete("https://spamazon-ga-backend.herokuapp.com/api/products/"+event.target.value).then((response) => {
+          this.getProducts()
+      })
+  }
   componentDidMount = () => {
     this.getProducts();
-    this.authListener();
+    this.authListener()
   };
 
   render = () => {
@@ -85,7 +90,8 @@ class App extends React.Component {
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
-              <Products item={item} user={this.state.user} />
+              <Products item={item} user={this.state.user} updateProduct={this.updateProduct}
+              deleteProduct={this.deleteProduct} />
             </div>
           );
         })}

@@ -82,6 +82,7 @@ export default class Edit extends Component {
           <input type="hidden" id="created_by" value={this.state.created_by} />
 
           <input type="submit" value="edit Item" />
+          <button value = {this.props.item.id} onClick={this.props.deleteProduct}>Delete</button>
         </form>
       </div>
     );
