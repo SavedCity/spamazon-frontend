@@ -7,7 +7,8 @@ class Products extends React.Component {
   render() {
     return (
       <div>
-        <h6>By {this.props.item.created_by} </h6>
+        <h5>By {this.props.item.created_by} </h5>
+        <h5>{this.props.item.created_at}</h5>
 
         <h2> Name: {this.props.item.name} </h2>
 
@@ -15,17 +16,16 @@ class Products extends React.Component {
 
         <h2> Price: {this.props.item.price} </h2>
 
-        <details>
-          <summary>Edit</summary>
+        {this.props.user ? (
           <Edit
             user={this.props.user}
             item={this.props.item}
             updateProduct={this.props.updateProduct}
             deleteProduct={this.props.deleteProduct}
           ></Edit>
-        </details>
+        ) : null}
 
-        {this.props.user ? <button>Add to cart </button> : null}
+        {this.props.user ? <button> Add to cart </button> : null}
       </div>
     );
   }
