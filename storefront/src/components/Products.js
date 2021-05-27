@@ -22,7 +22,8 @@ class Products extends React.Component {
           <Edit
             user={this.props.user}
             item={this.props.item}
-            updateProduct={this.updateProduct}
+            updateProduct={this.props.updateProduct}
+            deleteProduct={this.props.deleteProduct}
           ></Edit>
         </details>
 
