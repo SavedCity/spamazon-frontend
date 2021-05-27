@@ -1,18 +1,34 @@
 import React from "react";
+import Edit from "./Edit";
+
 // import ViewProduct from "./ViewProduct";
 import {Link} from 'react-router-dom';
 import ViewProduct from './ViewProduct';
 
 class Products extends React.Component {
+  addToCart = () => {};
 
   render() {
     return (
       <div>
         <h6>By {this.props.item.created_by} </h6>
+
         <h2> Name: {this.props.item.name} </h2>
-        <Link to={`/${this.props.item.id}`} ><img src={this.props.item.image} alt={this.props.item.name} /></Link>
+
+        <img src={this.props.item.image} />
+
         <h2> Price: {this.props.item.price} </h2>
-        <ViewProduct item={this.props.item} />
+
+        <details>
+          <summary>Edit</summary>
+          <Edit
+            user={this.props.user}
+            item={this.props.item}
+            updateProduct={this.updateProduct}
+          ></Edit>
+        </details>
+
+        {this.props.user ? <button>Add to cart </button> : null}
       </div>
     );
   }

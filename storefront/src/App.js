@@ -6,8 +6,6 @@ import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
 import axios from "axios";
-import Edit from "./components/Edit";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends React.Component {
   state = {
@@ -53,14 +51,18 @@ class App extends React.Component {
       .catch((error) => console.error(error));
   };
   updateProduct = (event, product) => {
-      event.preventDefault()
-      const id = event.target.id
+    event.preventDefault();
+    const id = event.target.id;
 
-      axios.put("https://spamazon-ga-backend.herokuapp.com/api/products/"+id,
-  product).then((response) => {
-      this.getProducts()
-  })
-  }
+    axios
+      .put(
+        "https://spamazon-ga-backend.herokuapp.com/api/products/" + id,
+        product
+      )
+      .then((response) => {
+        this.getProducts();
+      });
+  };
   componentDidMount = () => {
     this.getProducts();
     this.authListener();
@@ -74,33 +76,14 @@ class App extends React.Component {
           <Nav user={this.state.user} logOut={this.logOut} />
           <h1>Spamazon's black market (keep secret)</h1>
 
-          {this.state.user ? (
-            <AddForm
-              handleSubmit={this.handleSubmit}
-              handleChange={this.handleChange}
-              addProduct={this.addProduct}
-              user={this.state.user}
-            />
-          ) : null}
-          {this.state.products.map((item) => {
-            return (
-              <div key={item.id}>
-                <Products item={item} />
-                <details>
-                <summary>Edit</summary>
-                <Edit products={item} updateProduct={this.updateProduct}></Edit>
-                </details>
-                <AddForm handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
-                addProduct={this.addProduct}/>
-              </div>
-            );
-          })}
-
-        </div>
-        <Route path="/:productId" component={ViewProduct} />
-
-      </Router>
+        {this.state.products.map((item) => {
+          return (
+            <div key={item.id}>
+              <Products item={item} user={this.state.user} />
+            </div>
+          );
+        })}
+      </div>
     );
   };
 }
