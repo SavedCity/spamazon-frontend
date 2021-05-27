@@ -54,6 +54,9 @@ export default class AddForm extends Component {
         <form id="form" onSubmit={this.handleSubmit}>
           <label htmlFor="name"> Name </label>
           <input
+            title="Must be between 5-64 characters long"
+            required
+            pattern="[a-zA-Z\W0-9]{5,64}"
             type="text"
             id="name"
             onChange={this.handleChange}
@@ -62,6 +65,9 @@ export default class AddForm extends Component {
 
           <label htmlFor="price"> Price </label>
           <input
+            min="0"
+            max="999999999"
+            required
             type="number"
             id="price"
             onChange={this.handleChangeNumbers}
@@ -70,6 +76,8 @@ export default class AddForm extends Component {
 
           <label htmlFor="description"> Description </label>
           <input
+            title="Length must not exceed 300 characters"
+            pattern="[a-zA-Z\W0-9]{0,300}"
             type="text"
             id="description"
             onChange={this.handleChange}
@@ -87,6 +95,9 @@ export default class AddForm extends Component {
 
           <label htmlFor="stock"> Stock </label>
           <input
+            min="0"
+            max="1000"
+            required
             type="number"
             id="stock"
             onChange={this.handleChangeNumbers}
