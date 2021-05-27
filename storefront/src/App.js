@@ -1,11 +1,13 @@
 import React from "react";
 import Products from "./components/Products";
+import ViewProduct from "./components/ViewProduct";
 import SignIn from "./components/SignIn";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
 import axios from "axios";
-import Edit from "./components/Edit"
+import Edit from "./components/Edit";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends React.Component {
   state = {
@@ -66,34 +68,39 @@ class App extends React.Component {
 
   render = () => {
     return (
-      <div>
-        <Nav user={this.state.user} logOut={this.logOut} />
-        <h1>Spamazon's black market (keep secret)</h1>
+      <Router>
 
-        {this.state.user ? (
-          <AddForm
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            addProduct={this.addProduct}
-            user={this.state.user}
-          />
-        ) : null}
+        <div>
+          <Nav user={this.state.user} logOut={this.logOut} />
+          <h1>Spamazon's black market (keep secret)</h1>
 
-        {this.state.products.map((item) => {
-          return (
-            <div key={item.id}>
-              <Products item={item} />
-              <details>
-              <summary>Edit</summary>
-              <Edit products = {item} updateProduct = {this.updateProduct}></Edit>
-              </details>
-              <AddForm handleSubmit={this.handleSubmit}
+          {this.state.user ? (
+            <AddForm
+              handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
-              addProduct={this.addProduct}/>
-            </div>
-          );
-        })}
-      </div>
+              addProduct={this.addProduct}
+              user={this.state.user}
+            />
+          ) : null}
+          {this.state.products.map((item) => {
+            return (
+              <div key={item.id}>
+                <Products item={item} />
+                <details>
+                <summary>Edit</summary>
+                <Edit products={item} updateProduct={this.updateProduct}></Edit>
+                </details>
+                <AddForm handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                addProduct={this.addProduct}/>
+              </div>
+            );
+          })}
+
+        </div>
+        <Route path="/:productId" component={ViewProduct} />
+
+      </Router>
     );
   };
 }
