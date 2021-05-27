@@ -54,15 +54,18 @@ class SignIn extends React.Component {
 
         <div id="signin-modal">
           <div className="signin-content">
-            <form>
+            <form onSubmit={this.login}>
               <span onClick={this.closeModal} className="signin-close">
                 X
               </span>
               <div className="fontuser">
                 <label className="email-title" htmlFor="">
-                  Email{" "}
+                  Email
                 </label>
                 <input
+                  required
+                  title="This email does not match email input format"
+                  pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$"
                   name="email"
                   type="text"
                   id="email"
@@ -76,6 +79,8 @@ class SignIn extends React.Component {
               <div className="fontpass">
                 <label htmlFor="">Password </label>
                 <input
+                  required
+                  pattern="[a-zA-Z\W0-9]{6,16}"
                   name="password"
                   type="password"
                   id="password"
@@ -86,7 +91,7 @@ class SignIn extends React.Component {
                 <i className="fas fa-lock"></i>
               </div>
 
-              <button onClick={this.login}> Login </button>
+              <input type="submit" value="Login" />
             </form>
 
             <SignUp />
