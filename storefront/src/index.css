@@ -143,3 +143,10 @@ body {
 img {
   width: 25%;
 }
+.hide {
+  display: none;
+}
+
+.product-img {
+  cursor: pointer;
+}

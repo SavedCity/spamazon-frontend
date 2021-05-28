@@ -77,24 +77,22 @@ class App extends React.Component {
     this.authListener();
   };
 
+  liftStateToApp = (stateObject) => {
+    this.setState(stateObject)
+  }
+
   render = () => {
     return (
         <div>
           <Nav user={this.state.user} logOut={this.logOut} />
           <h1>Spamazon's black market (keep secret)</h1>
+          <Products
+          products={this.state.products}
+          liftStateToApp={this.liftStateToApp}
+          updateProduct={this.updateProduct}
+          deleteProduct={this.deleteProduct}
+          />
 
-        {this.state.products.map((item) => {
-          return (
-            <div key={item.id}>
-              <Products
-                item={item}
-                user={this.state.user}
-                updateProduct={this.updateProduct}
-                deleteProduct={this.deleteProduct}
-              />
-            </div>
-          );
-        })}
       </div>
     );
   };

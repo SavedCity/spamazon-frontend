@@ -2,19 +2,33 @@ import React from "react";
 
 
 class ViewProduct extends React.Component {
-  render() {
 
+  findProduct = (e) => {
+    let products = this.props.products
+    for (let i=0; i<products.length; i++) {
+      if (e.target.id == products[i].id) {
+        this.props.toggleActiveProduct((products[i]))
+      }
+    }
+  }
+
+  render() {
     return (
-    <div>
-        <h2> By {this.props.item.created_by} </h2>
-        <h2> Name: {this.props.item.name} </h2>
-        <img src={this.props.item.image} alt={this.props.item.name} />
-        <h4> Price: {this.props.item.price} </h4>
-        <p> Details: {this.props.item.description} </p>
-        <h2> {this.props.item.stock} left </h2>
-      </div>
-    );
+    <section>
+      {this.props.products.map((item) => {
+        return (
+          <div key={item.id}>
+            <h2> Name: {item.name} </h2>
+            <img className='product-img' id={item.id} src={item.image} alt={item.name} onClick={this.findProduct}/>
+            <h2> Price: {item.price} </h2>
+          </div>
+        );
+      })}
+    </section>
+  )
   }
 }
-
 export default ViewProduct;
+// <div name={this.props.item.id} onClick={this.props.findProduct}>
+
+//   </div>
