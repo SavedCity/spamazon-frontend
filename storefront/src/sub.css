@@ -1,3 +1,10 @@
+:root {
+  --main: #eee2dc;
+  --blue_accent: #123C69;
+  --red_accent: #AC3B61;
+  --grey: #BAB2B5;
+  --tan:#EDC7B7;
+}
 .container {
   display: grid;
 
@@ -12,7 +19,44 @@
   grid-row-end:3
 }
 
-/* .products {
+.products {
     display:flex;
     flex-flow: wrap;
+    justify-content: flex-start;
+
+}
+
+html {
+    background: var(--main);
+}
+.nav-bar {
+    background: var(--blue_accent);
+}
+
+h1 {
+    color: var(--red_accent);
+}
+
+#creator {
+    color: var(--tan);
+    font-weight: bolder;
+}
+.logout {
+    background: var(--red_accent);
+}
+
+.btn1 {
+    border-radius: 3px;
+}
+
+.items {
+    width: 25em;
+    height: 25%;
+    font-family: 'Open Sans', sans-serif;
+}
+/* body{
+    font-family: 'Open Sans', sans-serif;
 } */
+.title {
+    font-family: 'Kaushan Script', cursive;
+}

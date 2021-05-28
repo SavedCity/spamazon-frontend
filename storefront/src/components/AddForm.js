@@ -106,7 +106,7 @@ export default class AddForm extends Component {
 
           <input type="hidden" id="created_by" value={this.state.created_by} />
 
-          <input type="submit" value="Upload Item" />
+          <input className = 'btn1' type="submit" value="Upload Item" />
         </form>
       </div>
     );

@@ -91,7 +91,7 @@ class App extends React.Component {
             user={this.state.user}
           />
         ) : null}
-
+        <div className = 'products'>
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
@@ -104,6 +104,7 @@ class App extends React.Component {
             </div>
           );
         })}
+        </div>
       </div>
     );
   };
