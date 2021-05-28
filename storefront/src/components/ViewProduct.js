@@ -14,7 +14,7 @@ class ViewProduct extends React.Component {
 
   render() {
     return (
-    <section>
+    <div className='product'>
       {this.props.products.map((item) => {
         return (
           <div key={item.id}>
@@ -24,7 +24,7 @@ class ViewProduct extends React.Component {
           </div>
         );
       })}
-    </section>
+    </div>
   )
   }
 }
