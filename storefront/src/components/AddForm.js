@@ -49,7 +49,7 @@ export default class AddForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className= 'create'>
         <h1> add a product!</h1>
         <form id="form" onSubmit={this.handleSubmit}>
           <label htmlFor="name"> Name </label>
@@ -106,7 +106,7 @@ export default class AddForm extends Component {
 
           <input type="hidden" id="created_by" value={this.state.created_by} />
 
-          <input type="submit" value="Upload Item" />
+          <input className = 'btn1' type="submit" value="Upload Item" />
         </form>
       </div>
     );

@@ -8,8 +8,8 @@ class Products extends React.Component {
 
   render() {
     return (
-      <div>
-        <h5>By {this.props.item.created_by} </h5>
+      <div className = 'items'>
+        <h5 id = 'creator'>By {this.props.item.created_by} </h5>
         <h5>{this.props.item.created_at}</h5>
 
         <h2> Name: {this.props.item.name} </h2>
