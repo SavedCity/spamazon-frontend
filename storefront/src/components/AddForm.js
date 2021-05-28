@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import fire from "../config/fire";
 
 export default class AddForm extends Component {
   state = {
@@ -52,7 +51,7 @@ export default class AddForm extends Component {
       <div>
         <h1> add a product!</h1>
         <form id="form" onSubmit={this.handleSubmit}>
-          <label htmlFor="name"> Name </label>
+          <label htmlFor=""> Name </label>
           <input
             title="Must be between 5-64 characters long"
             required
@@ -63,7 +62,7 @@ export default class AddForm extends Component {
             value={this.state.name}
           />
 
-          <label htmlFor="price"> Price </label>
+          <label htmlFor=""> Price </label>
           <input
             min="0"
             max="999999999"
@@ -74,7 +73,7 @@ export default class AddForm extends Component {
             value={this.state.price}
           />
 
-          <label htmlFor="description"> Description </label>
+          <label htmlFor=""> Description </label>
           <input
             title="Length must not exceed 300 characters"
             pattern="[a-zA-Z\W0-9]{0,300}"
@@ -84,16 +83,17 @@ export default class AddForm extends Component {
             value={this.state.description}
           />
 
-          <label htmlFor="image"> Image </label>
+          <label htmlFor=""> Image </label>
           <input
             type="text"
             id="image"
             onChange={this.handleImageChange}
             value={this.state.image}
+            alt=""
           />
-          <img src="" id="form-image" />
+          <img src="" id="form-image" alt="" />
 
-          <label htmlFor="stock"> Stock </label>
+          <label htmlFor=""> Stock </label>
           <input
             min="0"
             max="1000"
