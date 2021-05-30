@@ -6,21 +6,23 @@ import SignIn from "./SignIn";
 
 class Nav extends React.Component {
   // OPEN WARNIN' MODAL IF CLEAR CART BUTTON IS PRESSED
-  openModal = () => {
+  openClearCartModal = () => {
+    document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
     let modal = document.getElementById("open-cart-warning");
     modal.style.display = "block";
     this.closeCart();
   };
 
-  closeModal = () => {
+  closeClearCartModal = () => {
+    document.getElementsByTagName("BODY")[0].style.overflow = "auto";
     let modal = document.getElementById("open-cart-warning");
     modal.style.display = "none";
-    this.openCheckout();
+    this.openCart();
   };
 
-  // =========================================
+  // ===================== OPEN/CLOSE CART ====================
 
-  openCheckout = () => {
+  openCart = () => {
     let cartPopUp = document.getElementById("cart-popup");
     let cartContent = document.getElementById("cart-content");
 
@@ -34,6 +36,22 @@ class Nav extends React.Component {
 
     cartPopUp.classList.toggle("show");
     cartContent.classList.toggle("slide");
+  };
+
+  // ===================== OPEN/CLOSE PROCEED TO CHECKOUT ====================
+
+  openCheckout = () => {
+    document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
+    let modal = document.getElementById("open-checkout-modal");
+    modal.style.display = "block";
+    this.closeCart();
+  };
+
+  closeCheckout = () => {
+    document.getElementsByTagName("BODY")[0].style.overflow = "auto";
+    let modal = document.getElementById("open-checkout-modal");
+    modal.style.display = "none";
+    this.openCart();
   };
 
   raiseQuantity = (event) => {
@@ -51,7 +69,9 @@ class Nav extends React.Component {
     // console.log(quantity);
   };
 
+  // CLEARS THE SHOPPING CART
   clearCart = () => {
+    document.getElementsByTagName("BODY")[0].style.overflow = "auto";
     let cartItems = this.props.cartItems;
     let cartSum = this.props.sumOfCart;
 
@@ -59,7 +79,7 @@ class Nav extends React.Component {
     cartItems.splice(1, cartItems.length);
 
     this.props.showCartItems();
-    this.openCheckout();
+    this.openCart();
     console.log(cartItems);
   };
 
@@ -78,8 +98,9 @@ class Nav extends React.Component {
     if (cartSumLength > 0) {
       var lastSumofArray = cartSum.slice(-1)[0].price;
     }
+
     return (
-      <div className="nav-bar">
+      <div id="main" className="nav-bar">
         <h3 className="title">Spamazon</h3>
 
         {this.props.user ? (
@@ -93,7 +114,7 @@ class Nav extends React.Component {
         {this.props.user ? (
           <div>
             <i
-              onClick={this.openCheckout}
+              onClick={this.openCart}
               id="cart"
               className="fas fa-shopping-cart"
             >
@@ -126,20 +147,144 @@ class Nav extends React.Component {
               );
             })}
             {lengthOfCart > 1 ? (
-              <h1 className="total-in-cart">Total: ${lastSumofArray}</h1>
+              <h1 className="total-in-cart">Subtotal ${lastSumofArray}</h1>
             ) : null}
 
             {lengthOfCart > 1 ? (
               <div>
                 <div className="clear-button-div">
-                  <button className="checkout">CHECKOUT</button>
+                  <button onClick={this.openCheckout} className="checkout">
+                    PROCEED TO CHECKOUT
+                  </button>
+                  <div id="open-checkout-modal">
+                    <div className="checkout-modal-content">
+                      <div className="checkout-left-div">
+                        <h2>Contact information</h2>
+                        <input
+                          type="text"
+                          placeholder="EMAIL"
+                          placeholder={this.props.user.email}
+                        />
+                        <input id="checkbox" type="checkbox" />
+                        <label htmlFor="checkbox">
+                          Keep me up to date on exclusive offers
+                        </label>
+
+                        <h2>Shippind address</h2>
+                        <input type="text" placeholder="First Name" />
+                        <input type="text" placeholder="Last Name" />
+                        <input
+                          type="text"
+                          placeholder="House No, Street Address, Company Name, C/O"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Building, Floor, Nearest Landmark"
+                        />
+                        <input type="text" placeholder="City" />
+                        <select>
+                          <option value="NONE">State</option>
+                          <option value="AL">Alabama</option>
+                          <option value="AK">Alaska</option>
+                          <option value="AZ">Arizona</option>
+                          <option value="AR">Arkansas</option>
+                          <option value="CA">California</option>
+                          <option value="CO">Colorado</option>
+                          <option value="CT">Connecticut</option>
+                          <option value="DE">Delaware</option>
+                          <option value="DC">District Of Columbia</option>
+                          <option value="FL">Florida</option>
+                          <option value="GA">Georgia</option>
+                          <option value="HI">Hawaii</option>
+                          <option value="ID">Idaho</option>
+                          <option value="IL">Illinois</option>
+                          <option value="IN">Indiana</option>
+                          <option value="IA">Iowa</option>
+                          <option value="KS">Kansas</option>
+                          <option value="KY">Kentucky</option>
+                          <option value="LA">Louisiana</option>
+                          <option value="ME">Maine</option>
+                          <option value="MD">Maryland</option>
+                          <option value="MA">Massachusetts</option>
+                          <option value="MI">Michigan</option>
+                          <option value="MN">Minnesota</option>
+                          <option value="MS">Mississippi</option>
+                          <option value="MO">Missouri</option>
+                          <option value="MT">Montana</option>
+                          <option value="NE">Nebraska</option>
+                          <option value="NV">Nevada</option>
+                          <option value="NH">New Hampshire</option>
+                          <option value="NJ">New Jersey</option>
+                          <option value="NM">New Mexico</option>
+                          <option value="NY">New York</option>
+                          <option value="NC">North Carolina</option>
+                          <option value="ND">North Dakota</option>
+                          <option value="OH">Ohio</option>
+                          <option value="OK">Oklahoma</option>
+                          <option value="OR">Oregon</option>
+                          <option value="PA">Pennsylvania</option>
+                          <option value="RI">Rhode Island</option>
+                          <option value="SC">South Carolina</option>
+                          <option value="SD">South Dakota</option>
+                          <option value="TN">Tennessee</option>
+                          <option value="TX">Texas</option>
+                          <option value="UT">Utah</option>
+                          <option value="VT">Vermont</option>
+                          <option value="VA">Virginia</option>
+                          <option value="WA">Washington</option>
+                          <option value="WV">West Virginia</option>
+                          <option value="WI">Wisconsin</option>
+                          <option value="WY">Wyoming</option>
+                        </select>
+                        <input type="text" placeholder="Zip Code" />
+                        <input type="text" placeholder="Phone" />
+
+                        <button
+                          className="close-checkout-modal"
+                          onClick={this.closeCheckout}
+                        >
+                          RETURN TO CART
+                        </button>
+                        <button className="place-order-button">
+                          PLACE ORDER
+                        </button>
+                      </div>
+
+                      {unique.slice(1).map((item) => {
+                        return (
+                          <div className="checkout-right-div">
+                            <img
+                              className="checkout-img"
+                              src={item.image}
+                              alt={item.name}
+                            />
+
+                            <div className="cart-details-div">
+                              <h1 className="checkout-name">{item.name}</h1>
+
+                              <h2 className="checkout-price">{item.price}</h2>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <input
+                        type="text"
+                        placeholder="Gift card or discount code"
+                      />
+                      <input type="submit" value="Apply" />
+                      <h3>Total: ${lastSumofArray}</h3>
+                    </div>
+                  </div>
                   <button
                     className="continue-shopping"
                     onClick={this.closeCart}
                   >
                     CONTINUE SHOPPING
                   </button>
-                  <button className="clear-cart" onClick={this.openModal}>
+                  <button
+                    className="clear-cart"
+                    onClick={this.openClearCartModal}
+                  >
                     CLEAR CART
                   </button>
                 </div>
@@ -147,7 +292,7 @@ class Nav extends React.Component {
                 <div id="open-cart-warning">
                   <div className="cart-warning-content">
                     <h2 className="clear-cart-title">
-                      Are you sure you want to clear your cart?
+                      These items will be cleared from your cart
                     </h2>
                     {unique.slice(1).map((item) => {
                       return (
@@ -160,7 +305,7 @@ class Nav extends React.Component {
                     <button onClick={this.clearCart}>CLEAR CART</button>
                     <button
                       className="close-cart-warning"
-                      onClick={this.closeModal}
+                      onClick={this.closeClearCartModal}
                     >
                       CANCEL
                     </button>

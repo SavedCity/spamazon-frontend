@@ -26,7 +26,7 @@
 }
 
 html {
-  background: var(--main);
+  /* background: var(--main); */
 }
 .nav-bar {
   background: var(--blue_accent);

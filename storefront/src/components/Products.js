@@ -8,20 +8,19 @@ class Products extends React.Component {
   };
 
   // ====================================== OPEN CHECKOUT ==================================
-  openCheckout = () => {
+  openCart = () => {
     let cartPopUp = document.getElementById("cart-popup");
     let cartContent = document.getElementById("cart-content");
 
     if (this.props.checkoutOpenedOnce === false) {
       cartPopUp.classList.toggle("show");
       cartContent.classList.toggle("slide");
-    } else {
     }
   };
 
   // ===================================== ADD ITEM TO THE CART ==================================
   addToCart = () => {
-    this.openCheckout();
+    this.openCart();
 
     let id = this.props.item.id;
     let name = this.props.item.name;
@@ -97,10 +96,16 @@ class Products extends React.Component {
 
         <img className="product-img" src={this.props.item.image} alt="" />
 
-        {this.props.item.stock < 10 && this.props.item.stock > 0 ? (
+        {this.props.item.stock < 10 && this.props.item.stock > 4 ? (
           <h4 className="stock-warning">
             ONLY {this.props.item.stock} LEFT IN STOCK
           </h4>
+        ) : this.props.item.stock < 10 && this.props.item.stock > 0 ? (
+          <h4 className="stock-warning">
+            HURRY! ONLY {this.props.item.stock} LEFT IN STOCK
+          </h4>
+        ) : this.props.item.stock > 10 ? (
+          <h4 className="stock-warning">IN STOCK</h4>
         ) : null}
 
         <h2> Price: {this.props.item.price} </h2>
@@ -124,10 +129,12 @@ class Products extends React.Component {
                   className="far fa-trash-alt"
                 ></i>
               </div>
-            ) : (
+            ) : this.props.item.stock > 0 ? (
               <button className="add-to-cart" onClick={this.addToCart}>
                 ADD TO CART
               </button>
+            ) : (
+              <button className="already-in-cart">OUT OF STOCK</button>
             )}
           </div>
         ) : null}
