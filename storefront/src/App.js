@@ -10,13 +10,16 @@ class App extends React.Component {
   state = {
     products: [],
     user: {},
-    cartItems: [],
+    cartItems: [{ price: 0 }],
+    sumOfCart: [],
+    checkoutOpenedOnce: false,
   };
 
-  // TESTING CART
+  // CART
   showCartItems = () => {
     this.setState({
       cartItems: this.state.cartItems,
+      checkoutOpenedOnce: true,
     });
   };
 
@@ -89,6 +92,7 @@ class App extends React.Component {
     return (
       <div>
         <Nav
+          sumOfCart={this.state.sumOfCart}
           cartItems={this.state.cartItems}
           user={this.state.user}
           showCartItems={this.showCartItems}
@@ -105,21 +109,24 @@ class App extends React.Component {
             user={this.state.user}
           />
         ) : null}
-
-        {this.state.products.map((item) => {
-          return (
-            <div key={item.id}>
-              <Products
-                showCartItems={this.showCartItems}
-                cartItems={this.state.cartItems}
-                item={item}
-                user={this.state.user}
-                updateProduct={this.updateProduct}
-                deleteProduct={this.deleteProduct}
-              />
-            </div>
-          );
-        })}
+        <div className="products">
+          {this.state.products.map((item) => {
+            return (
+              <div key={item.id}>
+                <Products
+                  checkoutOpenedOnce={this.state.checkoutOpenedOnce}
+                  sumOfCart={this.state.sumOfCart}
+                  showCartItems={this.showCartItems}
+                  cartItems={this.state.cartItems}
+                  item={item}
+                  user={this.state.user}
+                  updateProduct={this.updateProduct}
+                  deleteProduct={this.deleteProduct}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   };

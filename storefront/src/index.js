@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "./sub.css";
 import App from "./App";
-// import Checkout from "./components/Checkout";
 import reportWebVitals from "./reportWebVitals";
+// import Routers from "./components/Routers";
 
 ReactDOM.render(
   <React.StrictMode>

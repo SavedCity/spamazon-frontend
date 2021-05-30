@@ -1,0 +1,61 @@
+:root {
+  --main: #eee2dc;
+  --blue_accent: #123c69;
+  --red_accent: #ac3b61;
+  --grey: #bab2b5;
+  --tan: #edc7b7;
+}
+.container {
+  display: grid;
+
+  grid-auto-columns: 1fr;
+  grid-template-rows: 200px 500px 200px;
+}
+
+.create {
+  grid-column-start: 1;
+  grid-column-end: 11;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+
+.products {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+}
+
+html {
+  background: var(--main);
+}
+.nav-bar {
+  background: var(--blue_accent);
+}
+
+h1 {
+  /* color: var(--red_accent); */
+}
+
+#creator {
+  color: var(--tan);
+  font-weight: bolder;
+}
+.logout {
+  background: var(--red_accent);
+}
+
+.btn1 {
+  border-radius: 3px;
+}
+
+.items {
+  width: 25em;
+  height: 25%;
+  font-family: "Open Sans", sans-serif;
+}
+/* body{
+    font-family: 'Open Sans', sans-serif;
+} */
+.title {
+  font-family: "Kaushan Script", cursive;
+}

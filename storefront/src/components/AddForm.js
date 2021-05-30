@@ -19,7 +19,7 @@ export default class AddForm extends Component {
 
   handleChangeNumbers = (event) => {
     this.setState({
-      [event.target.id]: parseInt(event.target.value),
+      [event.target.id]: event.target.value,
     });
   };
 
@@ -48,7 +48,7 @@ export default class AddForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="create">
         <h1> add a product!</h1>
         <form id="form" onSubmit={this.handleSubmit}>
           <label htmlFor=""> Name </label>
@@ -64,8 +64,6 @@ export default class AddForm extends Component {
 
           <label htmlFor=""> Price </label>
           <input
-            min="0"
-            max="999999999"
             required
             type="number"
             id="price"
@@ -106,7 +104,7 @@ export default class AddForm extends Component {
 
           <input type="hidden" id="created_by" value={this.state.created_by} />
 
-          <input type="submit" value="Upload Item" />
+          <input className="btn1" type="submit" value="Upload Item" />
         </form>
       </div>
     );

@@ -54,6 +54,7 @@ export default class Edit extends Component {
 
               <label htmlFor=""> Price </label>
               <input
+                step="0.01"
                 min="0"
                 max="999999999"
                 required
