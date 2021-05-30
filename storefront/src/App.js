@@ -49,7 +49,29 @@ class App extends React.Component {
       )
       .catch((error) => console.error(error));
   };
+  updateProduct = (event, product) => {
+    event.preventDefault();
+    const id = event.target.id;
 
+    axios
+      .put(
+        "https://spamazon-ga-backend.herokuapp.com/api/products/" + id,
+        product
+      )
+      .then((response) => {
+        this.getProducts();
+      });
+  };
+  deleteProduct = (event) => {
+    axios
+      .delete(
+        "https://spamazon-ga-backend.herokuapp.com/api/products/" +
+          event.target.value
+      )
+      .then((response) => {
+        this.getProducts();
+      });
+  };
   componentDidMount = () => {
     this.getProducts();
     this.authListener();
@@ -69,14 +91,20 @@ class App extends React.Component {
             user={this.state.user}
           />
         ) : null}
-
+        <div className = 'products'>
         {this.state.products.map((item) => {
           return (
             <div key={item.id}>
-              <Products item={item} />
+              <Products
+                item={item}
+                user={this.state.user}
+                updateProduct={this.updateProduct}
+                deleteProduct={this.deleteProduct}
+              />
             </div>
           );
         })}
+        </div>
       </div>
     );
   };
