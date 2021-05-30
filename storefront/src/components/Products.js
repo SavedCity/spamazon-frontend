@@ -1,5 +1,4 @@
 import React from "react";
-import Edit from "./Edit";
 import ViewProduct from './ViewProduct'
 import ProductDetail from './ProductDetail'
 
@@ -22,19 +21,13 @@ class Products extends React.Component {
     return <div>
       <ViewProduct toggleActiveProduct={this.toggleActiveProduct}
       products={this.props.products}
+      user={this.props.user}
+      updateProduct={this.props.updateProduct}
+      deleteProduct={this.props.deleteProduct}
       />
-      <ProductDetail activeProduct={this.state.activeProduct} liftStateToApp={this.props.liftStateToApp}/>
-      <div>
-        {this.props.user ? (
-          <Edit
-            user={this.props.user}
-            item={this.props.item}
-            updateProduct={this.props.updateProduct}
-            deleteProduct={this.props.deleteProduct}
-          ></Edit>
-        ) : null}
-        {this.props.user ? <button> Add to cart </button> : null}
-      </div>
+      <ProductDetail activeProduct={this.state.activeProduct} liftStateToApp={this.props.liftStateToApp}
+      />
+
     </div>
   }
 }

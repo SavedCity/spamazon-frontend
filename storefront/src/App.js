@@ -91,8 +91,8 @@ class App extends React.Component {
           liftStateToApp={this.liftStateToApp}
           updateProduct={this.updateProduct}
           deleteProduct={this.deleteProduct}
+          user={this.state.user}
           />
-
       </div>
     );
   };
