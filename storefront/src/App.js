@@ -24,6 +24,7 @@ class App extends React.Component {
     });
   };
 
+  // FOR CART LIMITATION OF 6 ITEMS
   triggerCartLimitUp = () => {
     this.setState({
       cartLimit: (this.state.cartLimit += 1),
@@ -32,6 +33,12 @@ class App extends React.Component {
   triggerCartLimitDown = () => {
     this.setState({
       cartLimit: (this.state.cartLimit -= 1),
+    });
+  };
+
+  triggerCartLimitReset = () => {
+    this.setState({
+      cartLimit: (this.state.cartLimit = 0),
     });
   };
 
@@ -104,6 +111,8 @@ class App extends React.Component {
     return (
       <div>
         <Nav
+          products={this.state.products}
+          triggerCartLimitReset={this.triggerCartLimitReset}
           sumOfCart={this.state.sumOfCart}
           cartItems={this.state.cartItems}
           user={this.state.user}

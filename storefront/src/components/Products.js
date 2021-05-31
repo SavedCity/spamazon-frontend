@@ -1,12 +1,7 @@
 import React from "react";
 import Edit from "./Edit";
-// import { Route, BrowserRouter as Router, Link } from "react-router-dom";
 
 class Products extends React.Component {
-  state = {
-    addToCartClick: false,
-  };
-
   // ====================================== OPEN CHECKOUT ==================================
   openCart = () => {
     let cartPopUp = document.getElementById("cart-popup");
@@ -31,7 +26,6 @@ class Products extends React.Component {
 
     let cartArray = this.props.cartItems;
 
-    // IF THE ITEM IS ALREADY IN THE CART
     cartArray.push({ id, name, price, image });
 
     // ADDING ALL THE PRICE VALUES IN THE ARRAY
@@ -48,10 +42,6 @@ class Products extends React.Component {
 
     console.log(cartArray);
     console.log(this.props.cartLimit);
-
-    this.setState({
-      addToCartClick: true,
-    });
   };
 
   // ============================== REMOVE ITEM FROM THE CART =================================
@@ -84,10 +74,6 @@ class Products extends React.Component {
     this.props.triggerCartLimitDown();
 
     console.log(this.props.cartLimit);
-
-    this.setState({
-      addToCartClick: false,
-    });
   };
 
   render() {

@@ -57,18 +57,61 @@ class Nav extends React.Component {
   };
 
   raiseQuantity = (event) => {
-    // let quantity = event.target.nextSibling.nextSibling.firstChild;
-    let id = this.props.cartItems.id;
-    let name = this.props.cartItems.name;
-    let price = this.props.cartItems.price;
-    let image = this.props.cartItems.image;
-    let cartSum = this.props.sumOfCart;
+    let cartTotal = this.props.sumOfCart;
+    let cartArray = this.props.cartItems;
+    let price =
+      event.target.parentElement.previousSibling.firstChild.nextSibling
+        .nextSibling.firstChild.nextSibling.firstChild.wholeText;
+    let id =
+      event.target.parentElement.previousSibling.firstChild.firstChild
+        .wholeText;
+    let numberId = parseInt(id);
 
-    // cartSum.push();
+    cartArray.push({ numberId, price });
 
-    // this.props.showCartItems();
+    // ADDING ALL THE PRICE VALUES IN THE ARRAY
+    let sum = cartArray.reduce((previousValue, currentValue) => {
+      return {
+        price: parseFloat(previousValue.price) + parseFloat(currentValue.price),
+      };
+    });
 
-    // console.log(quantity);
+    cartTotal.push(sum);
+
+    this.props.showCartItems();
+    console.log(price);
+  };
+
+  lowerQuantity = (event) => {
+    let cartTotal = this.props.sumOfCart;
+    let cartArray = this.props.cartItems;
+    let price =
+      event.target.parentElement.previousSibling.firstChild.nextSibling
+        .nextSibling.firstChild.nextSibling.firstChild.wholeText;
+
+    let id =
+      event.target.parentElement.previousSibling.firstChild.firstChild
+        .wholeText;
+
+    let numberId = parseInt(id);
+
+    for (let i = 0; i < cartArray.length; i++) {
+      if (cartArray[i].numberId === numberId) {
+        cartArray.splice(i, 1);
+        break;
+      }
+    }
+
+    // ADDING ALL THE PRICE VALUES IN THE ARRAY
+    let sum = cartArray.reduce((previousValue, currentValue) => {
+      return {
+        price: parseFloat(previousValue.price) + parseFloat(currentValue.price),
+      };
+    });
+
+    cartTotal.push(sum);
+
+    this.props.showCartItems();
   };
 
   // CLEARS THE SHOPPING CART
@@ -82,6 +125,7 @@ class Nav extends React.Component {
 
     this.props.showCartItems();
     this.openCart();
+    this.props.triggerCartLimitReset();
     console.log(cartItems);
   };
 
@@ -132,12 +176,32 @@ class Nav extends React.Component {
             {unique.slice(1).map((item) => {
               return (
                 <div className="cart-item-div">
-                  <img className="cart-img" src={item.image} alt={item.name} />
+                  <div className="cart-item-div-left">
+                    <div className="id-to-hide">{item.id}</div>
+                    <img
+                      className="cart-img"
+                      src={item.image}
+                      alt={item.name}
+                    />
 
-                  <div className="cart-details-div">
-                    <h1 className="cart-name">{item.name}</h1>
+                    <div className="cart-details-div">
+                      <h1 className="cart-name">{item.name}</h1>
 
-                    <h2 className="cart-price">{item.price}</h2>
+                      <h2 className="cart-price">{item.price}</h2>
+                    </div>
+                  </div>
+                  <div className="arrows-div">
+                    <h4>Quantity</h4>
+                    <i
+                      title="Raise Quantity"
+                      onClick={this.raiseQuantity}
+                      class="fas fa-chevron-up"
+                    ></i>
+                    <i
+                      title="Lower Quantity"
+                      onClick={this.lowerQuantity}
+                      class="fas fa-chevron-down"
+                    ></i>
                   </div>
                 </div>
               );
