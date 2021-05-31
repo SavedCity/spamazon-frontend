@@ -26,9 +26,9 @@
 
 }
 
-html {
+/* html {
     background: var(--main);
-}
+} */
 .nav-bar {
     background: var(--blue_accent);
 }
@@ -59,4 +59,9 @@ h1 {
 } */
 .title {
     font-family: 'Kaushan Script', cursive;
+}
+
+.footer {
+    background: var(--tan);
+    opacity: 50%;
 }

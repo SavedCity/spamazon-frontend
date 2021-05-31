@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 export default class Edit extends Component {
   state = {
-    name: "",
-    price: "",
-    description: "",
-    image: "",
-    stock: "",
-    created_by: "",
+    name: this.props.item.name,
+    price: this.props.item.price,
+    description: this.props.item.description,
+    image: this.props.item.image,
+    stock: this.props.item.stock,
+    created_by: this.props.item.created_by,
   };
   handleChange = (event) => {
     this.setState({
@@ -50,6 +50,7 @@ export default class Edit extends Component {
                 id="name"
                 onChange={this.handleChange}
                 value={this.state.name}
+                placeholder={this.props.item.name}
               />
 
               <label htmlFor=""> Price </label>
@@ -61,6 +62,7 @@ export default class Edit extends Component {
                 id="price"
                 onChange={this.handleChangeNumbers}
                 value={this.state.price}
+                placeholder={this.props.item.price}
               />
 
               <label htmlFor=""> Description </label>
@@ -71,6 +73,7 @@ export default class Edit extends Component {
                 id="description"
                 onChange={this.handleChange}
                 value={this.state.description}
+                placeholder={this.props.item.description}
               />
 
               <label htmlFor=""> Image </label>
@@ -79,6 +82,7 @@ export default class Edit extends Component {
                 id="image"
                 onChange={this.handleChange}
                 value={this.state.image}
+                placeholder={this.props.item.image}
               />
 
               <label htmlFor=""> Stock </label>
@@ -90,6 +94,7 @@ export default class Edit extends Component {
                 id="stock"
                 onChange={this.handleChangeNumbers}
                 value={this.state.stock}
+                placeholder={this.props.item.stock}
               />
 
               <input

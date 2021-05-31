@@ -1,15 +1,45 @@
 import React from "react";
 import Products from "./components/Products";
-import SignIn from "./components/SignIn";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
 import axios from "axios";
+import Footer from "./components/footer"
 
 class App extends React.Component {
   state = {
-    products: [],
-    user: {},
+   products: [],
+   user: {},
+   cartItems: [{ price: 0 }],
+   sumOfCart: [],
+   checkoutOpenedOnce: false,
+   cartLimit: 0,
+ };
+
+ // CART
+  showCartItems = () => {
+    this.setState({
+      cartItems: this.state.cartItems,
+      checkoutOpenedOnce: true,
+    });
+  };
+
+  // FOR CART LIMITATION OF 6 ITEMS
+  triggerCartLimitUp = () => {
+    this.setState({
+      cartLimit: (this.state.cartLimit += 1),
+    });
+  };
+  triggerCartLimitDown = () => {
+    this.setState({
+      cartLimit: (this.state.cartLimit -= 1),
+    });
+  };
+
+  triggerCartLimitReset = () => {
+    this.setState({
+      cartLimit: (this.state.cartLimit = 0),
+    });
   };
 
   // AUTHENTICATION
@@ -77,11 +107,24 @@ class App extends React.Component {
     this.authListener();
   };
 
+  liftStateToApp = (stateObject) => {
+    this.setState(stateObject)
+  }
+
   render = () => {
     return (
-      <div>
-        <Nav user={this.state.user} logOut={this.logOut} />
-        <h1>Spamazon's black market (keep secret)</h1>
+        <div>
+          <Nav
+          products={this.state.products}
+          triggerCartLimitReset={this.triggerCartLimitReset}
+          sumOfCart={this.state.sumOfCart}
+          cartItems={this.state.cartItems}
+          user={this.state.user}
+          showCartItems={this.showCartItems}
+          logOut={this.logOut}
+          />
+
+          <h1>Spamazon's black market (keep secret)</h1>
 
         {this.state.user ? (
           <AddForm
@@ -90,21 +133,22 @@ class App extends React.Component {
             addProduct={this.addProduct}
             user={this.state.user}
           />
-        ) : null}
-        <div className = 'products'>
-        {this.state.products.map((item) => {
-          return (
-            <div key={item.id}>
-              <Products
-                item={item}
-                user={this.state.user}
-                updateProduct={this.updateProduct}
-                deleteProduct={this.deleteProduct}
-              />
-            </div>
-          );
-        })}
-        </div>
+          ) : null}
+        <Products
+          triggerCartLimitDown={this.triggerCartLimitDown}
+          triggerCartLimitUp={this.triggerCartLimitUp}
+          cartLimit={this.state.cartLimit}
+          checkoutOpenedOnce={this.state.checkoutOpenedOnce}
+          sumOfCart={this.state.sumOfCart}
+          showCartItems={this.showCartItems}
+          cartItems={this.state.cartItems}
+          products={this.state.products}
+          liftStateToApp={this.liftStateToApp}
+          updateProduct={this.updateProduct}
+          deleteProduct={this.deleteProduct}
+          user={this.state.user}
+          />
+          <Footer/>
       </div>
     );
   };
