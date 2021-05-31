@@ -29,18 +29,6 @@ class ViewProduct extends React.Component {
                 onClick={this.findProduct}
               />
 
-              {item.stock < 10 && item.stock > 4 ? (
-                <h4 className="stock-warning">
-                  ONLY {item.stock} LEFT IN STOCK
-                </h4>
-              ) : item.stock < 10 && item.stock > 0 ? (
-                <h4 className="stock-warning">
-                  HURRY! ONLY {item.stock} LEFT IN STOCK
-                </h4>
-              ) : item.stock > 10 ? (
-                <h4 className="stock-warning">IN STOCK</h4>
-              ) : null}
-
               <h2> Price: {item.price} </h2>
 
               {this.props.user ? (

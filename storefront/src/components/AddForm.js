@@ -91,17 +91,6 @@ export default class AddForm extends Component {
           />
           <img src="" id="form-image" alt="" />
 
-          <label htmlFor=""> Stock </label>
-          <input
-            min="1"
-            max="1000"
-            required
-            type="number"
-            id="stock"
-            onChange={this.handleChangeNumbers}
-            value={this.state.stock}
-          />
-
           <input type="hidden" id="created_by" value={this.state.created_by} />
 
           <input className="btn1" type="submit" value="Upload Item" />

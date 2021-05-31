@@ -10,7 +10,7 @@ body {
 .nav-bar {
   display: flex;
   width: 100%;
-  background: #333;
+  background: #73d4ff;
   padding: 5px 10px;
   position: fixed;
   top: 0;
@@ -259,6 +259,7 @@ body {
   width: 20px;
   font-size: 23px;
   color: #0009;
+  transition: 0.3s;
 }
 .fa-chevron-down {
   /* background: #0007; */
@@ -269,6 +270,7 @@ body {
   font-size: 23px;
   margin-bottom: 20px;
   color: #0009;
+  transition: 0.2s;
 }
 
 .fa-chevron-down:hover,

@@ -6,7 +6,7 @@ export default class Edit extends Component {
     description: this.props.item.description,
     image: this.props.item.image,
     stock: this.props.item.stock,
-    created_by: "",
+    created_by: this.props.item.created_by,
   };
   handleChange = (event) => {
     this.setState({
@@ -84,18 +84,6 @@ export default class Edit extends Component {
                 onChange={this.handleChange}
                 value={this.state.image}
                 placeholder={this.props.item.image}
-              />
-
-              <label htmlFor=""> Stock </label>
-              <input
-                min="0"
-                max="1000"
-                required
-                type="number"
-                id="stock"
-                onChange={this.handleChangeNumbers}
-                value={this.state.stock}
-                placeholder={this.props.item.stock}
               />
 
               <input
