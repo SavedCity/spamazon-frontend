@@ -112,6 +112,7 @@ class Nav extends React.Component {
     cartTotal.push(sum);
 
     this.props.showCartItems();
+    console.log(cartTotal);
   };
 
   // CLEARS THE SHOPPING CART

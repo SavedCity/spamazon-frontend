@@ -241,17 +241,32 @@ body {
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
+  margin-left: 10px;
+  align-items: center;
+}
+
+.arrows-div > h4 {
+  color: #282828;
+  margin-bottom: 3px;
 }
 
 .fa-chevron-up {
-  padding: 8px;
+  /* background: #0007; */
+  text-align: center;
+  padding: 4px 6px 0 6px;
   cursor: pointer;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
+  width: 20px;
+  font-size: 23px;
 }
 .fa-chevron-down {
-  padding: 8px;
+  /* background: #0007; */
+  text-align: center;
+  padding: 4px 6px 0 6px;
   cursor: pointer;
-  /* margin-bottom: 20px; */
+  width: 20px;
+  font-size: 23px;
+  margin-bottom: 20px;
 }
 
 .fa-chevron-down:hover,
