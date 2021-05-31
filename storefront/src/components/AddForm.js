@@ -93,7 +93,7 @@ export default class AddForm extends Component {
 
           <label htmlFor=""> Stock </label>
           <input
-            min="0"
+            min="1"
             max="1000"
             required
             type="number"

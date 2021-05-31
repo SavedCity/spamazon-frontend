@@ -44,7 +44,10 @@ class Products extends React.Component {
     cartTotal.push(sum);
 
     this.props.showCartItems();
+    this.props.triggerCartLimitUp();
+
     console.log(cartArray);
+    console.log(this.props.cartLimit);
 
     this.setState({
       addToCartClick: true,
@@ -78,8 +81,9 @@ class Products extends React.Component {
     // cartTotal.splice(sum, 2);
 
     this.props.showCartItems();
+    this.props.triggerCartLimitDown();
 
-    console.log(cartArray);
+    console.log(this.props.cartLimit);
 
     this.setState({
       addToCartClick: false,
@@ -89,10 +93,11 @@ class Products extends React.Component {
   render() {
     let id = this.props.item.id;
     let cartArray = this.props.cartItems;
+    let cartLimit = this.props.cartLimit;
 
     return (
       <div className="items">
-        <h2> Name: {this.props.item.name} </h2>
+        <h2>{this.props.item.name} </h2>
 
         <img className="product-img" src={this.props.item.image} alt="" />
 
@@ -119,25 +124,20 @@ class Products extends React.Component {
           ></Edit>
         ) : null}
 
-        {this.props.user ? (
-          <div>
-            {cartArray.some((item) => item.id === id) ? (
-              <div>
-                <button className="already-in-cart">IN CART</button>
-                <i
-                  onClick={this.removeFromCart}
-                  className="far fa-trash-alt"
-                ></i>
-              </div>
-            ) : this.props.item.stock > 0 ? (
-              <button className="add-to-cart" onClick={this.addToCart}>
-                ADD TO CART
-              </button>
-            ) : (
-              <button className="already-in-cart">OUT OF STOCK</button>
-            )}
-          </div>
-        ) : null}
+        <div>
+          {cartArray.some((item) => item.id === id) ? (
+            <div>
+              <button className="already-in-cart">IN CART</button>
+              <i onClick={this.removeFromCart} className="far fa-trash-alt"></i>
+            </div>
+          ) : this.props.item.stock > 0 && cartLimit < 6 ? (
+            <button className="add-to-cart" onClick={this.addToCart}>
+              ADD TO CART
+            </button>
+          ) : (
+            <button className="already-in-cart">CART LIMIT REACHED</button>
+          )}
+        </div>
       </div>
     );
   }
