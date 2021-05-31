@@ -1,6 +1,5 @@
 import React from "react";
 import Products from "./components/Products";
-import SignIn from "./components/SignIn";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
@@ -8,8 +7,19 @@ import axios from "axios";
 
 class App extends React.Component {
   state = {
-    products: [],
-    user: {},
+   products: [],
+   user: {},
+   cartItems: [{ price: 0 }],
+   sumOfCart: [],
+   checkoutOpenedOnce: false,
+ };
+
+ // CART
+  showCartItems = () => {
+    this.setState({
+      cartItems: this.state.cartItems,
+      checkoutOpenedOnce: true,
+    });
   };
 
   // AUTHENTICATION
@@ -84,9 +94,29 @@ class App extends React.Component {
   render = () => {
     return (
         <div>
-          <Nav user={this.state.user} logOut={this.logOut} />
+          <Nav
+          sumOfCart={this.state.sumOfCart}
+          cartItems={this.state.cartItems}
+          user={this.state.user}
+          showCartItems={this.showCartItems}
+          logOut={this.logOut}
+          />
+
           <h1>Spamazon's black market (keep secret)</h1>
-          <Products
+
+        {this.state.user ? (
+          <AddForm
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            addProduct={this.addProduct}
+            user={this.state.user}
+          />
+          ) : null}
+        <Products
+          checkoutOpenedOnce={this.state.checkoutOpenedOnce}
+          sumOfCart={this.state.sumOfCart}
+          showCartItems={this.showCartItems}
+          cartItems={this.state.cartItems}
           products={this.state.products}
           liftStateToApp={this.liftStateToApp}
           updateProduct={this.updateProduct}

@@ -1,12 +1,11 @@
 import React from "react";
 import ViewProduct from './ViewProduct'
-import ProductDetail from './ProductDetail'
 
 class Products extends React.Component {
   state = {
-    activeProduct: {}
+    activeProduct: {},
   }
-  addToCart = () => {};
+
 
   toggleActiveProduct = (productObject) => {
     this.setState(
@@ -14,18 +13,23 @@ class Products extends React.Component {
             activeProduct: productObject
         }
     )
-    document.getElementById('active-post').classList.toggle('hide')
+    document.getElementById('active-product').classList.toggle('hide')
   }
 
   render() {
     return <div>
-      <ViewProduct toggleActiveProduct={this.toggleActiveProduct}
-      products={this.props.products}
-      user={this.props.user}
-      updateProduct={this.props.updateProduct}
-      deleteProduct={this.props.deleteProduct}
-      />
-      <ProductDetail activeProduct={this.state.activeProduct} liftStateToApp={this.props.liftStateToApp}
+      <ViewProduct
+        toggleActiveProduct={this.toggleActiveProduct}
+        checkoutOpenedOnce={this.props.checkoutOpenedOnce}
+        sumOfCart={this.props.sumOfCart}
+        showCartItems={this.props.showCartItems}
+        cartItems={this.props.cartItems}
+        products={this.props.products}
+        user={this.props.user}
+        updateProduct={this.props.updateProduct}
+        deleteProduct={this.props.deleteProduct}
+        activeProduct={this.state.activeProduct}
+        liftStateToApp={this.props.liftStateToApp}
       />
 
     </div>

@@ -1,7 +1,10 @@
 import React from "react";
+import ProductDetail from './ProductDetail';
 import Edit from "./Edit";
+import Cart from "./Cart";
 
 class ViewProduct extends React.Component {
+
 
   findProduct = (e) => {
     let products = this.props.products
@@ -17,27 +20,44 @@ class ViewProduct extends React.Component {
     <div className='products'>
       {this.props.products.map((item) => {
         return (
-          <div key={item.id}>
-            <h2> Name: {item.name} </h2>
+          <div>
+            <h2> {item.name} </h2>
+
             <img className='product-img' id={item.id} src={item.image} alt={item.name} onClick={this.findProduct}/>
+
+            {item.stock < 10 && item.stock > 0 ? (
+              <h4 className="stock-warning">
+                ONLY {item.stock} LEFT IN STOCK
+              </h4>
+            ) : null}
+
             <h2> Price: {item.price} </h2>
+
             {this.props.user ? (
               <Edit
                 user={this.props.user}
-                item={this.props.item}
+                item={item}
                 updateProduct={this.props.updateProduct}
                 deleteProduct={this.props.deleteProduct}
-              ></Edit>
+              />
             ) : null}
-            {this.props.user ? <button> Add to cart </button> : null}
-          </div>
-        );
+            <Cart
+              item={item}
+              user={this.props.user}
+              checkoutOpenedOnce={this.props.checkoutOpenedOnce}
+              sumOfCart={this.props.sumOfCart}
+              showCartItems={this.props.showCartItems}
+              cartItems={this.props.cartItems}
+              />
+        </div>
+        )
       })}
+      <ProductDetail
+        liftStateToApp={this.props.liftStateToApp}
+        activeProduct={this.props.activeProduct}
+        />
     </div>
   )
   }
 }
 export default ViewProduct;
-// <div name={this.props.item.id} onClick={this.props.findProduct}>
-
-//   </div>
