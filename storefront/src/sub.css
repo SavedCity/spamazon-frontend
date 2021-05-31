@@ -60,3 +60,8 @@ h1 {
 .title {
     font-family: 'Kaushan Script', cursive;
 }
+
+.footer {
+    background: var(--tan);
+    opacity: 50%;
+}
