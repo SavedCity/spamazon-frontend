@@ -1,13 +1,12 @@
 :root {
   --main: #eee2dc;
-  --blue_accent: #123C69;
-  --red_accent: #AC3B61;
-  --grey: #BAB2B5;
-  --tan:#EDC7B7;
+  --blue_accent: #123c69;
+  --red_accent: #ac3b61;
+  --grey: #bab2b5;
+  --tan: #edc7b7;
 }
 .container {
   display: grid;
-
   grid-auto-columns: 1fr;
   grid-template-rows: 200px 500px 200px;
 }
@@ -15,48 +14,58 @@
 .create {
   grid-column-start: 1;
   grid-column-end: 11;
-  grid-row-start:3;
-  grid-row-end:3
+  grid-row-start: 3;
+  grid-row-end: 3;
 }
 
 .products {
-    display:flex;
-    flex-flow: wrap;
-    justify-content: flex-start;
-
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
 }
 
+<<<<<<< HEAD
+html {
+  /* background: var(--main); */
+}
+=======
 /* html {
     background: var(--main);
 } */
+>>>>>>> 9cb2c6bf5367aed75af3baf63285e4e1dcc27d24
 .nav-bar {
-    background: var(--blue_accent);
+  background: var(--blue_accent);
 }
 
 h1 {
-    color: var(--red_accent);
+  /* color: var(--red_accent); */
 }
 
 #creator {
-    color: var(--tan);
-    font-weight: bolder;
+  color: var(--tan);
+  font-weight: bolder;
 }
 .logout {
-    background: var(--red_accent);
+  background: var(--red_accent);
 }
 
 .btn1 {
-    border-radius: 3px;
+  border-radius: 3px;
 }
 
 .items {
-    width: 25em;
-    height: 25%;
-    font-family: 'Open Sans', sans-serif;
+  width: 25em;
+  height: 25%;
+  font-family: "Open Sans", sans-serif;
 }
 /* body{
     font-family: 'Open Sans', sans-serif;
 } */
 .title {
-    font-family: 'Kaushan Script', cursive;
+  font-family: "Kaushan Script", cursive;
+}
+
+.footer {
+    background: var(--tan);
+    opacity: 50%;
 }

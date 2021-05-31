@@ -10,7 +10,7 @@ body {
 .nav-bar {
   display: flex;
   width: 100%;
-  background: #333;
+  background: #73d4ff;
   padding: 5px 10px;
   position: fixed;
   top: 0;
@@ -241,22 +241,42 @@ body {
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
+  margin-left: 10px;
+  align-items: center;
+}
+
+.arrows-div > h4 {
+  color: #282828;
+  margin-bottom: 3px;
 }
 
 .fa-chevron-up {
-  padding: 8px;
+  /* background: #0007; */
+  text-align: center;
+  padding: 4px 6px 0 6px;
   cursor: pointer;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
+  width: 20px;
+  font-size: 23px;
+  color: #0009;
+  transition: 0.3s;
 }
 .fa-chevron-down {
-  padding: 8px;
+  /* background: #0007; */
+  text-align: center;
+  padding: 4px 6px 0 6px;
   cursor: pointer;
-  /* margin-bottom: 20px; */
+  width: 20px;
+  font-size: 23px;
+  margin-bottom: 20px;
+  color: #0009;
+  transition: 0.2s;
 }
 
 .fa-chevron-down:hover,
 .fa-chevron-up:hover {
   /* background: #0005; */
+  color: #000;
 }
 
 .cart-price {

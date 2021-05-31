@@ -64,7 +64,7 @@ class SignIn extends React.Component {
                 </label>
                 <input
                   required
-                  title="This email does not match email input format"
+                  title="Please fill out this field in email format"
                   pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$"
                   name="email"
                   type="text"

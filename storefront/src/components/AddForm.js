@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import fire from "../config/fire";
 
 export default class AddForm extends Component {
   state = {
@@ -20,7 +19,7 @@ export default class AddForm extends Component {
 
   handleChangeNumbers = (event) => {
     this.setState({
-      [event.target.id]: parseInt(event.target.value),
+      [event.target.id]: event.target.value,
     });
   };
 
@@ -49,10 +48,10 @@ export default class AddForm extends Component {
 
   render() {
     return (
-      <div className= 'create'>
+      <div className="create">
         <h1> add a product!</h1>
         <form id="form" onSubmit={this.handleSubmit}>
-          <label htmlFor="name"> Name </label>
+          <label htmlFor=""> Name </label>
           <input
             title="Must be between 5-64 characters long"
             required
@@ -63,10 +62,8 @@ export default class AddForm extends Component {
             value={this.state.name}
           />
 
-          <label htmlFor="price"> Price </label>
+          <label htmlFor=""> Price </label>
           <input
-            min="0"
-            max="999999999"
             required
             type="number"
             id="price"
@@ -74,7 +71,7 @@ export default class AddForm extends Component {
             value={this.state.price}
           />
 
-          <label htmlFor="description"> Description </label>
+          <label htmlFor=""> Description </label>
           <input
             title="Length must not exceed 300 characters"
             pattern="[a-zA-Z\W0-9]{0,300}"
@@ -84,29 +81,19 @@ export default class AddForm extends Component {
             value={this.state.description}
           />
 
-          <label htmlFor="image"> Image </label>
+          <label htmlFor=""> Image </label>
           <input
             type="text"
             id="image"
             onChange={this.handleImageChange}
             value={this.state.image}
+            alt=""
           />
-          <img src="" id="form-image" />
-
-          <label htmlFor="stock"> Stock </label>
-          <input
-            min="0"
-            max="1000"
-            required
-            type="number"
-            id="stock"
-            onChange={this.handleChangeNumbers}
-            value={this.state.stock}
-          />
+          <img src="" id="form-image" alt="" />
 
           <input type="hidden" id="created_by" value={this.state.created_by} />
 
-          <input className = 'btn1' type="submit" value="Upload Item" />
+          <input className="btn1" type="submit" value="Upload Item" />
         </form>
       </div>
     );
