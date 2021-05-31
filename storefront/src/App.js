@@ -3,20 +3,21 @@ import Products from "./components/Products";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
+
 import axios from "axios";
-import Footer from "./components/footer"
+import Footer from "./components/footer";
 
 class App extends React.Component {
   state = {
-   products: [],
-   user: {},
-   cartItems: [{ price: 0 }],
-   sumOfCart: [],
-   checkoutOpenedOnce: false,
-   cartLimit: 0,
- };
+    products: [],
+    user: {},
+    cartItems: [{ price: 0 }],
+    sumOfCart: [],
+    checkoutOpenedOnce: false,
+    cartLimit: 0,
+  };
 
- // CART
+  // CART
   showCartItems = () => {
     this.setState({
       cartItems: this.state.cartItems,
@@ -108,13 +109,13 @@ class App extends React.Component {
   };
 
   liftStateToApp = (stateObject) => {
-    this.setState(stateObject)
-  }
+    this.setState(stateObject);
+  };
 
   render = () => {
     return (
-        <div>
-          <Nav
+      <div>
+        <Nav
           products={this.state.products}
           triggerCartLimitReset={this.triggerCartLimitReset}
           sumOfCart={this.state.sumOfCart}
@@ -122,9 +123,9 @@ class App extends React.Component {
           user={this.state.user}
           showCartItems={this.showCartItems}
           logOut={this.logOut}
-          />
+        />
 
-          <h1>Spamazon's black market (keep secret)</h1>
+        <h1>Spamazon's black market (keep secret)</h1>
 
         {this.state.user ? (
           <AddForm
@@ -133,7 +134,7 @@ class App extends React.Component {
             addProduct={this.addProduct}
             user={this.state.user}
           />
-          ) : null}
+        ) : null}
         <Products
           triggerCartLimitDown={this.triggerCartLimitDown}
           triggerCartLimitUp={this.triggerCartLimitUp}
@@ -147,8 +148,8 @@ class App extends React.Component {
           updateProduct={this.updateProduct}
           deleteProduct={this.deleteProduct}
           user={this.state.user}
-          />
-          <Footer/>
+        />
+        <Footer />
       </div>
     );
   };

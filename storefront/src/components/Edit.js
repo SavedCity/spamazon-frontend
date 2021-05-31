@@ -55,6 +55,7 @@ export default class Edit extends Component {
 
               <label htmlFor=""> Price </label>
               <input
+                step="0.01"
                 min="0"
                 max="999999999"
                 required
@@ -83,18 +84,6 @@ export default class Edit extends Component {
                 onChange={this.handleChange}
                 value={this.state.image}
                 placeholder={this.props.item.image}
-              />
-
-              <label htmlFor=""> Stock </label>
-              <input
-                min="0"
-                max="1000"
-                required
-                type="number"
-                id="stock"
-                onChange={this.handleChangeNumbers}
-                value={this.state.stock}
-                placeholder={this.props.item.stock}
               />
 
               <input
