@@ -26,9 +26,9 @@
 
 }
 
-html {
+/* html {
     background: var(--main);
-}
+} */
 .nav-bar {
     background: var(--blue_accent);
 }
