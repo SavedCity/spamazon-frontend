@@ -87,24 +87,21 @@ class Cart extends React.Component {
 
   render = () => {
     return (
-    <div>
-        {this.props.user ? (
-          <div>
+      <div>
+        <div>
             {this.props.cartItems.some((cartItem) => cartItem.id === this.props.item.id) ? (
               <div>
-                <button className="already-in-cart">IN CART</button>
-                <i
-                  onClick={this.removeFromCart}
-                  className="far fa-trash-alt"
-                ></i>
-              </div>
-            ) : (
-              <button className="add-to-cart" onClick={this.addToCart}>
-                ADD TO CART
-              </button>
-            )}
-          </div>
-        ) : null}
+              <button className="already-in-cart">IN CART</button>
+              <i onClick={this.removeFromCart} className="far fa-trash-alt"></i>
+            </div>
+          ) : this.props.item.stock > 0 && this.props.cartLimit < 6 ? (
+            <button className="add-to-cart" onClick={this.addToCart}>
+              ADD TO CART
+            </button>
+          ) : (
+            <button className="already-in-cart">CART LIMIT REACHED</button>
+          )}
+        </div>
       </div>
     )
   }

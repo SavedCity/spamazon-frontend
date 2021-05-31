@@ -19,6 +19,7 @@ class Products extends React.Component {
   render() {
     return <div>
       <ViewProduct
+        cartLimit={this.props.cartLimit}
         toggleActiveProduct={this.toggleActiveProduct}
         checkoutOpenedOnce={this.props.checkoutOpenedOnce}
         sumOfCart={this.props.sumOfCart}

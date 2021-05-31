@@ -17,7 +17,7 @@ class ViewProduct extends React.Component {
 
   render() {
     return (
-    <div className='products'>
+    <div className='items'>
       {this.props.products.map((item) => {
         return (
           <div>
@@ -25,11 +25,17 @@ class ViewProduct extends React.Component {
 
             <img className='product-img' id={item.id} src={item.image} alt={item.name} onClick={this.findProduct}/>
 
-            {item.stock < 10 && item.stock > 0 ? (
+            {item.stock < 10 && item.stock > 4 ? (
               <h4 className="stock-warning">
                 ONLY {item.stock} LEFT IN STOCK
               </h4>
-            ) : null}
+            ) : item.stock < 10 && item.stock > 0 ? (
+              <h4 className="stock-warning">
+                HURRY! ONLY {item.stock} LEFT IN STOCK
+              </h4>
+            ) : item.stock > 10 ? (
+          <h4 className="stock-warning">IN STOCK</h4>
+        ) : null}
 
             <h2> Price: {item.price} </h2>
 
@@ -48,6 +54,7 @@ class ViewProduct extends React.Component {
               sumOfCart={this.props.sumOfCart}
               showCartItems={this.props.showCartItems}
               cartItems={this.props.cartItems}
+              cartLimit={this.props.cartLimit}
               />
         </div>
         )

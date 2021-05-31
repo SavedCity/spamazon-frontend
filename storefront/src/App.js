@@ -12,6 +12,7 @@ class App extends React.Component {
    cartItems: [{ price: 0 }],
    sumOfCart: [],
    checkoutOpenedOnce: false,
+   cartLimit: 0,
  };
 
  // CART
@@ -19,6 +20,24 @@ class App extends React.Component {
     this.setState({
       cartItems: this.state.cartItems,
       checkoutOpenedOnce: true,
+    });
+  };
+
+  // FOR CART LIMITATION OF 6 ITEMS
+  triggerCartLimitUp = () => {
+    this.setState({
+      cartLimit: (this.state.cartLimit += 1),
+    });
+  };
+  triggerCartLimitDown = () => {
+    this.setState({
+      cartLimit: (this.state.cartLimit -= 1),
+    });
+  };
+
+  triggerCartLimitReset = () => {
+    this.setState({
+      cartLimit: (this.state.cartLimit = 0),
     });
   };
 
@@ -95,6 +114,8 @@ class App extends React.Component {
     return (
         <div>
           <Nav
+          products={this.state.products}
+          triggerCartLimitReset={this.triggerCartLimitReset}
           sumOfCart={this.state.sumOfCart}
           cartItems={this.state.cartItems}
           user={this.state.user}
@@ -113,6 +134,9 @@ class App extends React.Component {
           />
           ) : null}
         <Products
+          triggerCartLimitDown={this.triggerCartLimitDown}
+          triggerCartLimitUp={this.triggerCartLimitUp}
+          cartLimit={this.state.cartLimit}
           checkoutOpenedOnce={this.state.checkoutOpenedOnce}
           sumOfCart={this.state.sumOfCart}
           showCartItems={this.showCartItems}
