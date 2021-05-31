@@ -1,5 +1,8 @@
 import React from "react";
 import SignIn from "./SignIn";
+// import { Link, useHistory } from "react-router-dom";
+
+// import Checkout from "./Checkout";
 
 class Nav extends React.Component {
   // OPEN WARNIN' MODAL IF CLEAR CART BUTTON IS PRESSED

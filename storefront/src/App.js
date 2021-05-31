@@ -107,6 +107,10 @@ class App extends React.Component {
     this.authListener();
   };
 
+  liftStateToApp = (stateObject) => {
+    this.setState(stateObject);
+  };
+
   render = () => {
     return (
       <div>
@@ -130,27 +134,20 @@ class App extends React.Component {
             user={this.state.user}
           />
         ) : null}
-        <div className="products">
-          {this.state.products.map((item) => {
-            return (
-              <div key={item.id}>
-                <Products
-                  triggerCartLimitDown={this.triggerCartLimitDown}
-                  triggerCartLimitUp={this.triggerCartLimitUp}
-                  cartLimit={this.state.cartLimit}
-                  checkoutOpenedOnce={this.state.checkoutOpenedOnce}
-                  sumOfCart={this.state.sumOfCart}
-                  showCartItems={this.showCartItems}
-                  cartItems={this.state.cartItems}
-                  item={item}
-                  user={this.state.user}
-                  updateProduct={this.updateProduct}
-                  deleteProduct={this.deleteProduct}
-                />
-              </div>
-            );
-          })}
-        </div>
+        <Products
+          triggerCartLimitDown={this.triggerCartLimitDown}
+          triggerCartLimitUp={this.triggerCartLimitUp}
+          cartLimit={this.state.cartLimit}
+          checkoutOpenedOnce={this.state.checkoutOpenedOnce}
+          sumOfCart={this.state.sumOfCart}
+          showCartItems={this.showCartItems}
+          cartItems={this.state.cartItems}
+          products={this.state.products}
+          liftStateToApp={this.liftStateToApp}
+          updateProduct={this.updateProduct}
+          deleteProduct={this.deleteProduct}
+          user={this.state.user}
+        />
       </div>
     );
   };

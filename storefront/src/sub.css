@@ -24,9 +24,15 @@
   justify-content: flex-start;
 }
 
+<<<<<<< HEAD
 html {
   /* background: var(--main); */
 }
+=======
+/* html {
+    background: var(--main);
+} */
+>>>>>>> 9cb2c6bf5367aed75af3baf63285e4e1dcc27d24
 .nav-bar {
   background: var(--blue_accent);
 }
