@@ -5,6 +5,7 @@ import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
 
 import axios from "axios";
+import Footer from "./components/footer";
 
 class App extends React.Component {
   state = {
@@ -148,6 +149,7 @@ class App extends React.Component {
           deleteProduct={this.deleteProduct}
           user={this.state.user}
         />
+        <Footer />
       </div>
     );
   };
