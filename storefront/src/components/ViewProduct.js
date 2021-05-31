@@ -17,10 +17,10 @@ class ViewProduct extends React.Component {
 
   render() {
     return (
-    <div className='items'>
+    <div className="products">
       {this.props.products.map((item) => {
         return (
-          <div>
+          <div key={item.id} className="items">
             <h2> {item.name} </h2>
 
             <img className='product-img' id={item.id} src={item.image} alt={item.name} onClick={this.findProduct}/>
