@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 export default class Edit extends Component {
   state = {
-    name: "",
-    price: "",
-    description: "",
-    image: "",
-    stock: "",
-    created_by: "",
+    name: this.props.item.name,
+    price: this.props.item.price,
+    description: this.props.item.description,
+    image: this.props.item.image,
+    stock: this.props.item.stock,
+    created_by: this.props.item.created_by,
   };
   handleChange = (event) => {
     this.setState({
