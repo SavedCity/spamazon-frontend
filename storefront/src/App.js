@@ -81,7 +81,7 @@ class App extends React.Component {
     return (
       <div>
         <Nav user={this.state.user} logOut={this.logOut} />
-        <h1>Spamazon's black market (keep secret)</h1>
+        <h1 id = 'top'>Spamazon's black market (keep secret)</h1>
 
         {this.state.user ? (
           <AddForm
@@ -105,6 +105,7 @@ class App extends React.Component {
           );
         })}
         </div>
+        <a href = "#top"> Back to top </a>
       </div>
     );
   };
