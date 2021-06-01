@@ -193,7 +193,6 @@ class Nav extends React.Component {
                       <h1 className="cart-name">{item.name}</h1>
 
                       <h2 className="cart-price">{item.price}</h2>
-                      <h1>{item.stock}</h1>
                     </div>
                   </div>
                   <div className="arrows-div">

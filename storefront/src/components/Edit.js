@@ -5,7 +5,6 @@ export default class Edit extends Component {
     price: this.props.item.price,
     description: this.props.item.description,
     image: this.props.item.image,
-    stock: this.props.item.stock,
     created_by: this.props.item.created_by,
   };
   handleChange = (event) => {

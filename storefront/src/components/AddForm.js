@@ -6,7 +6,6 @@ export default class AddForm extends Component {
     price: "",
     description: "",
     image: "",
-    stock: "",
     created_by: "",
   };
 
@@ -40,7 +39,6 @@ export default class AddForm extends Component {
       price: "",
       description: "",
       image: "",
-      stock: "",
       created_by: "",
     });
     document.getElementById("form-image").src = "";
