@@ -3,6 +3,7 @@ import Products from "./components/Products";
 import fire from "./config/fire";
 import AddForm from "./components/AddForm";
 import Nav from "./components/Nav";
+import UnderNav from "./components/UnderNav";
 
 import axios from "axios";
 import Footer from "./components/footer";
@@ -10,7 +11,7 @@ import Footer from "./components/footer";
 class App extends React.Component {
   state = {
     products: [],
-    user: {},
+    user: null,
     cartItems: [{ price: 0 }],
     sumOfCart: [],
     checkoutOpenedOnce: false,
@@ -45,18 +46,23 @@ class App extends React.Component {
 
   // AUTHENTICATION
   authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      } else {
-        this.setState({ user: null });
-      }
-    });
+    setTimeout(() => {
+      fire.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({ user });
+        } else {
+          this.setState({ user: null });
+        }
+      });
+    }, 500);
   };
 
   logOut = () => {
-    fire.auth().signOut();
+    setTimeout(() => {
+      fire.auth().signOut();
+    }, 500);
   };
+
   handleChange = (event) => {
     this.setState({
       [event.target.id]: event.target.value,
@@ -125,16 +131,14 @@ class App extends React.Component {
           logOut={this.logOut}
         />
 
-        <h1>Spamazon's black market (keep secret)</h1>
+        <UnderNav user={this.state.user} products={this.state.products} />
 
-        {this.state.user ? (
-          <AddForm
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            addProduct={this.addProduct}
-            user={this.state.user}
-          />
-        ) : null}
+        <AddForm
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          addProduct={this.addProduct}
+          user={this.state.user}
+        />
         <Products
           triggerCartLimitDown={this.triggerCartLimitDown}
           triggerCartLimitUp={this.triggerCartLimitUp}
@@ -149,7 +153,6 @@ class App extends React.Component {
           deleteProduct={this.deleteProduct}
           user={this.state.user}
         />
-        <Footer />
       </div>
     );
   };

@@ -10,6 +10,7 @@ class Products extends React.Component {
     this.setState({
       activeProduct: productObject,
     });
+    document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
     document.getElementById("active-product-modal").classList.toggle("hide");
   };
 
@@ -17,6 +18,8 @@ class Products extends React.Component {
     return (
       <div>
         <ViewProduct
+          triggerCartLimitDown={this.props.triggerCartLimitDown}
+          triggerCartLimitUp={this.props.triggerCartLimitUp}
           cartLimit={this.props.cartLimit}
           toggleActiveProduct={this.toggleActiveProduct}
           checkoutOpenedOnce={this.props.checkoutOpenedOnce}

@@ -42,7 +42,8 @@ class Cart extends React.Component {
     cartTotal.push(sum);
 
     this.props.showCartItems();
-    console.log(cartArray);
+    this.props.triggerCartLimitUp();
+    console.log(this.props.cartLimit);
 
     this.setState({
       addToCartClick: true,
@@ -82,9 +83,9 @@ class Cart extends React.Component {
     });
 
     cartTotal.push(sum);
-    // cartTotal.splice(sum, 2);
 
     this.props.showCartItems();
+    this.props.triggerCartLimitDown();
 
     console.log(cartArray);
 
@@ -104,7 +105,7 @@ class Cart extends React.Component {
               <button className="already-in-cart">IN CART</button>
               <i onClick={this.removeFromCart} className="far fa-trash-alt"></i>
             </div>
-          ) : this.props.item.stock > 0 && this.props.cartLimit < 6 ? (
+          ) : this.props.cartLimit < 6 ? (
             <button className="add-to-cart" onClick={this.addToCart}>
               ADD TO CART
             </button>
