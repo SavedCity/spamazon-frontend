@@ -10,7 +10,8 @@ class Products extends React.Component {
     this.setState({
       activeProduct: productObject,
     });
-    document.getElementById("active-product").classList.toggle("hide");
+    document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
+    document.getElementById("active-product-modal").classList.toggle("hide");
   };
 
   render() {

@@ -133,14 +133,12 @@ class App extends React.Component {
 
         <UnderNav user={this.state.user} products={this.state.products} />
 
-        {this.state.user ? (
-          <AddForm
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            addProduct={this.addProduct}
-            user={this.state.user}
-          />
-        ) : null}
+        <AddForm
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          addProduct={this.addProduct}
+          user={this.state.user}
+        />
         <Products
           triggerCartLimitDown={this.triggerCartLimitDown}
           triggerCartLimitUp={this.triggerCartLimitUp}

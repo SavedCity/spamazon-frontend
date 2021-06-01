@@ -136,6 +136,14 @@ class Nav extends React.Component {
     console.log(cartItems);
   };
 
+  openPostModal = () => {
+    setTimeout(() => {
+      document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
+      let modal = document.getElementById("create-form-modal");
+      modal.style.display = "block";
+    }, 250);
+  };
+
   render() {
     // CART ITEMS
     let array = this.props.cartItems;
@@ -159,7 +167,10 @@ class Nav extends React.Component {
       let logout = document.querySelector(".logout");
       let cart = document.querySelector(".fa-shopping-cart");
       let signin = document.querySelector("#signin-button");
+      let plus = document.querySelector(".fa-plus");
+      let sell = document.querySelector(".sell-title");
 
+      // NAV BAR ON SCROLL CHANGES CSS
       if (window.scrollY < 140) {
         nav.classList.remove("scroll");
         title.classList.remove("scroll");
@@ -167,6 +178,8 @@ class Nav extends React.Component {
         logout.classList.remove("scroll");
         cart.classList.remove("scroll");
         signin.classList.remove("scroll");
+        plus.classList.remove("scroll");
+        sell.classList.remove("scroll");
       } else {
         nav.classList.add("scroll");
         title.classList.add("scroll");
@@ -174,6 +187,8 @@ class Nav extends React.Component {
         logout.classList.add("scroll");
         cart.classList.add("scroll");
         signin.classList.add("scroll");
+        plus.classList.add("scroll");
+        sell.classList.add("scroll");
       }
     };
 
@@ -201,6 +216,18 @@ class Nav extends React.Component {
               <i className="fas fa-sign-out-alt"></i> Log out
             </span>
             <SignIn />
+          </div>
+        )}
+
+        {this.props.user ? (
+          <div className="sell-div">
+            <h2 className="sell-title">Have something to sell?</h2>
+            <i onClick={this.openPostModal} className="fas fa-plus"></i>
+          </div>
+        ) : (
+          <div className="sell-div-before">
+            <h2 className="sell-title">Login to sell with us</h2>
+            <i className="fas fa-plus"></i>
           </div>
         )}
 

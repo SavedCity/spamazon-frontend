@@ -6,7 +6,6 @@ export default class AddForm extends Component {
     price: "",
     description: "",
     image: "",
-    stock: "",
     created_by: "",
   };
 
@@ -28,7 +27,6 @@ export default class AddForm extends Component {
       [event.target.id]: event.target.value,
     });
     let image = document.getElementById("form-image");
-
     image.src = event.target.value;
   };
 
@@ -40,61 +38,104 @@ export default class AddForm extends Component {
       price: "",
       description: "",
       image: "",
-      stock: "",
       created_by: "",
     });
     document.getElementById("form-image").src = "";
   };
 
+  closePostModal = () => {
+    setTimeout(() => {
+      document.getElementsByTagName("BODY")[0].style.overflow = "auto";
+      let modal = document.getElementById("create-form-modal");
+      modal.style.display = "none";
+    }, 250);
+  };
+
   render() {
     return (
       <div className="create">
-        <h1> add a product!</h1>
-        <form id="form" onSubmit={this.handleSubmit}>
-          <label htmlFor=""> Name </label>
-          <input
-            title="Must be between 5-64 characters long"
-            required
-            pattern="[a-zA-Z\W0-9]{5,64}"
-            type="text"
-            id="name"
-            onChange={this.handleChange}
-            value={this.state.name}
-          />
+        <div id="create-form-modal">
+          <div className="create-form-content">
+            <form id="create-form" onSubmit={this.handleSubmit}>
+              <div className="create-form-div">
+                <h2>POST IT HERE</h2>
 
-          <label htmlFor=""> Price </label>
-          <input
-            required
-            type="number"
-            id="price"
-            onChange={this.handleChangeNumbers}
-            value={this.state.price}
-          />
+                <div className="title-price-div">
+                  <div>
+                    <label htmlFor=""> </label>
+                    <input
+                      min="1"
+                      placeholder="Price *"
+                      required
+                      type="number"
+                      id="price"
+                      onChange={this.handleChangeNumbers}
+                      value={this.state.price}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor=""> </label>
+                    <input
+                      placeholder="Image URL *"
+                      type="text"
+                      id="image"
+                      onChange={this.handleImageChange}
+                      value={this.state.image}
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <label htmlFor=""> </label>
+                <input
+                  placeholder="Title *"
+                  title="Must be between 5-64 characters long"
+                  required
+                  pattern="[a-zA-Z\W0-9]{5,64}"
+                  type="text"
+                  id="name"
+                  onChange={this.handleChange}
+                  value={this.state.name}
+                />
 
-          <label htmlFor=""> Description </label>
-          <input
-            title="Length must not exceed 300 characters"
-            pattern="[a-zA-Z\W0-9]{0,300}"
-            type="text"
-            id="description"
-            onChange={this.handleChange}
-            value={this.state.description}
-          />
+                <label htmlFor=""> </label>
+                <textarea
+                  placeholder="Brief description of the product you are selling with Spamazon *"
+                  title="Length must not exceed 300 characters"
+                  pattern="[a-zA-Z\W0-9]{0,300}"
+                  type="text"
+                  id="description"
+                  onChange={this.handleChange}
+                  value={this.state.description}
+                ></textarea>
 
-          <label htmlFor=""> Image </label>
-          <input
-            type="text"
-            id="image"
-            onChange={this.handleImageChange}
-            value={this.state.image}
-            alt=""
-          />
-          <img src="" id="form-image" alt="" />
+                <input
+                  type="hidden"
+                  id="created_by"
+                  value={this.state.created_by}
+                />
 
-          <input type="hidden" id="created_by" value={this.state.created_by} />
+                <input
+                  className="post-submit"
+                  type="submit"
+                  value="SUBMIT PRODUCT"
+                />
+              </div>
+            </form>
+            <button className="post-back" onClick={this.closePostModal}>
+              CANCEL
+            </button>
 
-          <input className="btn1" type="submit" value="Upload Item" />
-        </form>
+            <h1>Sell something great!</h1>
+            <img className="post-svg" src="/images/post.svg" alt="post" />
+          </div>
+          <div className="post-image">
+            <img
+              src="https://www.penworthy.com/Image/Getimage?id=C:\Repositories\Common\About%20Us\Slide1.jpg"
+              id="form-image"
+              alt=""
+            />
+          </div>
+        </div>
       </div>
     );
   }
