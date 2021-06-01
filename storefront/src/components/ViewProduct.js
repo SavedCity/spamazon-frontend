@@ -1,70 +1,71 @@
 import React from "react";
-import ProductDetail from './ProductDetail';
+import ProductDetail from "./ProductDetail";
 import Edit from "./Edit";
 import Cart from "./Cart";
 
 class ViewProduct extends React.Component {
-
-
   findProduct = (e) => {
-    let products = this.props.products
-    for (let i=0; i<products.length; i++) {
+    let products = this.props.products;
+    for (let i = 0; i < products.length; i++) {
       if (e.target.id == products[i].id) {
-        this.props.toggleActiveProduct((products[i]))
+        this.props.toggleActiveProduct(products[i]);
       }
     }
-  }
+  };
 
   render() {
     return (
-    <div className="products">
-      {this.props.products.map((item) => {
-        return (
-          <div key={item.id} className="items">
-            <h2> {item.name} </h2>
+      <div id="middle" className="products">
+        <div className="products-div">
+          {this.props.products
+            .slice(0)
+            .reverse()
+            .map((item) => {
+              return (
+                <div key={item.id} className="items">
+                  <div className="image-div">
+                    <img
+                      className="product-img"
+                      id={item.id}
+                      src={item.image}
+                      alt={item.name}
+                      onClick={this.findProduct}
+                    />
+                  </div>
 
-            <img className='product-img' id={item.id} src={item.image} alt={item.name} onClick={this.findProduct}/>
+                  <h2> {item.name} </h2>
 
-            {item.stock < 10 && item.stock > 4 ? (
-              <h4 className="stock-warning">
-                ONLY {item.stock} LEFT IN STOCK
-              </h4>
-            ) : item.stock < 10 && item.stock > 0 ? (
-              <h4 className="stock-warning">
-                HURRY! ONLY {item.stock} LEFT IN STOCK
-              </h4>
-            ) : item.stock > 10 ? (
-          <h4 className="stock-warning">IN STOCK</h4>
-        ) : null}
+                  <h2>${item.price} </h2>
 
-            <h2> Price: {item.price} </h2>
-
-            {this.props.user ? (
-              <Edit
-                user={this.props.user}
-                item={item}
-                updateProduct={this.props.updateProduct}
-                deleteProduct={this.props.deleteProduct}
-              />
-            ) : null}
-            <Cart
-              item={item}
-              user={this.props.user}
-              checkoutOpenedOnce={this.props.checkoutOpenedOnce}
-              sumOfCart={this.props.sumOfCart}
-              showCartItems={this.props.showCartItems}
-              cartItems={this.props.cartItems}
-              cartLimit={this.props.cartLimit}
-              />
+                  {this.props.user ? (
+                    <Edit
+                      user={this.props.user}
+                      item={item}
+                      updateProduct={this.props.updateProduct}
+                      deleteProduct={this.props.deleteProduct}
+                    />
+                  ) : null}
+                  <Cart
+                    triggerCartLimitDown={this.props.triggerCartLimitDown}
+                    triggerCartLimitUp={this.props.triggerCartLimitUp}
+                    item={item}
+                    user={this.props.user}
+                    checkoutOpenedOnce={this.props.checkoutOpenedOnce}
+                    sumOfCart={this.props.sumOfCart}
+                    showCartItems={this.props.showCartItems}
+                    cartItems={this.props.cartItems}
+                    cartLimit={this.props.cartLimit}
+                  />
+                </div>
+              );
+            })}
         </div>
-        )
-      })}
-      <ProductDetail
-        liftStateToApp={this.props.liftStateToApp}
-        activeProduct={this.props.activeProduct}
+        <ProductDetail
+          liftStateToApp={this.props.liftStateToApp}
+          activeProduct={this.props.activeProduct}
         />
-    </div>
-  )
+      </div>
+    );
   }
 }
 export default ViewProduct;

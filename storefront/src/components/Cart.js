@@ -3,7 +3,7 @@ import React from "react";
 class Cart extends React.Component {
   state = {
     addToCartClick: false,
-  }
+  };
 
   // ====================================== OPEN CHECKOUT ==================================
   openCheckout = () => {
@@ -13,7 +13,6 @@ class Cart extends React.Component {
     if (this.props.checkoutOpenedOnce === false) {
       cartPopUp.classList.toggle("show");
       cartContent.classList.toggle("slide");
-    } else {
     }
   };
 
@@ -43,7 +42,8 @@ class Cart extends React.Component {
     cartTotal.push(sum);
 
     this.props.showCartItems();
-    console.log(cartArray);
+    this.props.triggerCartLimitUp();
+    console.log(this.props.cartLimit);
 
     this.setState({
       addToCartClick: true,
@@ -55,15 +55,24 @@ class Cart extends React.Component {
     let id = this.props.item.id;
     let cartArray = this.props.cartItems;
     let cartTotal = this.props.sumOfCart;
+    let numberId = parseInt(id);
 
     let itemToRemoveIndex = cartArray.findIndex(function (item) {
       return item.id === id;
     });
 
+    let itemToRemoveIndex2 = cartArray.findIndex(function (item) {
+      return item.numberId === numberId;
+    });
+
+    if (itemToRemoveIndex2 !== -1) {
+      cartArray.splice(itemToRemoveIndex2, cartArray.length);
+    }
     // PROCEED TO REMOVE ITEM ONLY IF IT EXISTS
     if (itemToRemoveIndex !== -1) {
       cartArray.splice(itemToRemoveIndex, 1);
     }
+
     console.log(itemToRemoveIndex);
 
     // ADDING THE PRICES IN THE CART AFTER REMOVAL OF ONE
@@ -74,9 +83,9 @@ class Cart extends React.Component {
     });
 
     cartTotal.push(sum);
-    // cartTotal.splice(sum, 2);
 
     this.props.showCartItems();
+    this.props.triggerCartLimitDown();
 
     console.log(cartArray);
 
@@ -89,12 +98,14 @@ class Cart extends React.Component {
     return (
       <div>
         <div>
-            {this.props.cartItems.some((cartItem) => cartItem.id === this.props.item.id) ? (
-              <div>
+          {this.props.cartItems.some(
+            (cartItem) => cartItem.id === this.props.item.id
+          ) ? (
+            <div>
               <button className="already-in-cart">IN CART</button>
               <i onClick={this.removeFromCart} className="far fa-trash-alt"></i>
             </div>
-          ) : this.props.item.stock > 0 && this.props.cartLimit < 6 ? (
+          ) : this.props.cartLimit < 6 ? (
             <button className="add-to-cart" onClick={this.addToCart}>
               ADD TO CART
             </button>
@@ -103,8 +114,8 @@ class Cart extends React.Component {
           )}
         </div>
       </div>
-    )
-  }
+    );
+  };
 }
 
 export default Cart;
