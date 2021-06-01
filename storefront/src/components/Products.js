@@ -17,6 +17,8 @@ class Products extends React.Component {
     return (
       <div>
         <ViewProduct
+          triggerCartLimitDown={this.props.triggerCartLimitDown}
+          triggerCartLimitUp={this.props.triggerCartLimitUp}
           cartLimit={this.props.cartLimit}
           toggleActiveProduct={this.toggleActiveProduct}
           checkoutOpenedOnce={this.props.checkoutOpenedOnce}

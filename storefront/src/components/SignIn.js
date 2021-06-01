@@ -54,45 +54,49 @@ class SignIn extends React.Component {
 
         <div id="signin-modal">
           <div className="signin-content">
-            <form onSubmit={this.login}>
-              <span onClick={this.closeModal} className="signin-close">
-                X
-              </span>
-              <div className="fontuser">
-                <label className="email-title" htmlFor="">
-                  Email
-                </label>
-                <input
-                  required
-                  title="Please fill out this field in email format"
-                  pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$"
-                  name="email"
-                  type="text"
-                  id="email"
-                  placeholder="Enter email"
-                  onChange={this.handleSignInChange}
-                  value={this.state.email}
-                />
-                <i className="fas fa-user"></i>
-              </div>
+            <div className="signin-container">
+              <form onSubmit={this.login}>
+                <span onClick={this.closeModal} className="signin-close">
+                  X
+                </span>
+                <div className="fontuser">
+                  <label className="email-title" htmlFor="">
+                    Email
+                  </label>
+                  <input
+                    required
+                    title="Please fill out this field in email format"
+                    pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$"
+                    name="email"
+                    type="text"
+                    id="email"
+                    placeholder="Enter Email"
+                    onChange={this.handleSignInChange}
+                    value={this.state.email}
+                  />
+                  <i className="fas fa-user"></i>
+                </div>
 
-              <div className="fontpass">
-                <label htmlFor="">Password </label>
-                <input
-                  required
-                  pattern="[a-zA-Z\W0-9]{6,16}"
-                  name="password"
-                  type="password"
-                  id="password"
-                  placeholder="Enter password"
-                  onChange={this.handleSignInChange}
-                  value={this.state.password}
-                />
-                <i className="fas fa-lock"></i>
-              </div>
+                <div className="fontpass">
+                  <label htmlFor="">Password </label>
+                  <input
+                    required
+                    pattern="[a-zA-Z\W0-9]{6,16}"
+                    name="password"
+                    type="password"
+                    id="password"
+                    placeholder="Enter Password"
+                    onChange={this.handleSignInChange}
+                    value={this.state.password}
+                  />
+                  <i className="fas fa-lock"></i>
+                </div>
 
-              <input type="submit" value="Login" />
-            </form>
+                <input className="signin-submit" type="submit" value="Login" />
+                <h3 className="not-a-user">NOT A USER?</h3>
+                <div className="arrow"></div>
+              </form>
+            </div>
 
             <SignUp />
           </div>

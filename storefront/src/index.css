@@ -1,8 +1,8 @@
 body {
-  margin: 70px 0 0px 0;
+  margin: 105px 0 0px 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #888;
+  background: #f8f8f8;
 }
 
 /* =========================== NAV BAR =========================== */
@@ -10,67 +10,214 @@ body {
 .nav-bar {
   display: flex;
   width: 100%;
-  background: #73d4ff;
+  /* background: #48cae/4; */
   padding: 5px 10px;
   position: fixed;
   top: 0;
+  height: 60px;
+  z-index: 1;
+  transition: 0.5s;
+}
+
+.nav-bar.scroll {
+  background: #48cae4;
+  transition: 0.5s;
 }
 
 .title {
-  color: white;
+  color: #28aac4;
+  font-family: merienda one;
+  /* position: absolute; */
+  /* top: 73px; */
+  /* left: 80px; */
+  font-size: 34px;
+  margin: 5px 0 0 7px;
+  transition: 0.5s;
+}
+.title.scroll {
+  color: #fff;
+  transition: 0.5s;
+  text-shadow: 2px 2px 5px #0004;
+}
+
+.logo-cart {
+  width: 39px;
+  height: 39px;
+  /* position: absolute; */
+  /* top: 107px;
+  left: 34px; */
+  /* background: #282828; */
+  border-radius: 50px;
+  padding: 5px;
+  margin-top: 4px;
+  margin-left: 20px;
+  transition: 0.5s;
+}
+.logo-cart.scroll {
+  background: #fff;
+  box-shadow: 2px 2px 5px #0003;
 }
 
 .logout {
   border: none;
-  background: #9d0208;
-  color: white;
-  padding: 7px;
+  background: none;
+  color: #000;
+  padding: 7px 12px;
   font-size: 17px;
-  border-radius: 2px;
+  border-radius: 3px;
   cursor: pointer;
   position: fixed;
   right: 100px;
-  top: 20px;
+  top: 16px;
+  font-size: 23px;
+  /* box-shadow: 3px 3px 5px #0003; */
+  transition: 0.5s;
+}
+.logout:hover {
+  background: #0002;
+}
+.logout.scroll {
+  background: #bf4342;
+  color: #fff;
+}
+.logout.scroll:hover {
+  background: #af4342;
+  color: #fff;
+}
+.logout-before > span {
+  display: none;
 }
 
 #signin-button {
   border: none;
-  background: #0077b6;
-  color: white;
-  padding: 7px;
-  font-size: 20px;
-  border-radius: 2px;
+  background: none;
+  color: #000;
+  padding: 7px 12px;
+  font-size: 23px;
+  border-radius: 3px;
   cursor: pointer;
   position: fixed;
   right: 100px;
-  top: 18px;
+  top: 16px;
+  transition: 0.5s;
+}
+#signin-button.scroll {
+  color: #fff;
+  background: #282828;
+  transition: 0.5s;
+}
+#signin-button.scroll:hover {
+  background: #fff;
+  color: #000;
 }
 
 #signin-button:hover {
-  background: #48cae4;
+  background: #0002;
   color: black;
 }
 
 .fa-shopping-cart {
-  color: #fff;
+  color: #282828;
   font-size: 30px;
-  right: 30px;
+  right: 25px;
   position: fixed;
-  top: 21px;
+  top: 9px;
   cursor: pointer;
+  transition: 0.5s;
+  padding: 12px;
+  border-radius: 50px;
+}
+.fa-shopping-cart:hover {
+  background: #0002;
+}
+.fa-shopping-cart.scroll {
+  color: #fff;
+  text-shadow: 3px 3px 5px #0002;
 }
 
 .cart-length {
   color: #fff;
   font-size: 20px;
-  right: 18px;
+  right: 22px;
   position: fixed;
-  top: 8px;
+  top: 10px;
   margin: 0;
-  background: #d00;
+  background: #dd1c1a;
   border-radius: 50%;
   padding: 2px 7px;
   transition: 0.3s;
+  font-family: Roboto;
+}
+
+/* ========================== UNDERNAV ========================== */
+
+.undernav {
+  margin-bottom: 50px;
+  background: #f8f8f8;
+  padding: 100px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.middle-div-undernav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-heading1 {
+  font-family: kanit;
+  font-size: 25px;
+  width: 130%;
+  margin-top: 130px;
+  padding-left: 40px;
+  font-weight: 300;
+  color: #0008;
+}
+
+.main-heading2 {
+  font-family: kanit;
+  font-size: 30px;
+  width: 100%;
+  margin-top: 300px;
+  font-weight: 400;
+  color: #0008;
+}
+
+.left-div-undernav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+  margin-left: 70px;
+}
+.left-div-undernav > h1 {
+  font-family: Varela Round;
+  font-size: 35px;
+  color: #0006;
+}
+
+.right-div-undernav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+}
+
+.right-div-undernav > h1 {
+  font-family: Varela Round;
+  font-size: 28px;
+  margin-top: 28px;
+  color: #0006;
+}
+.deliveries-svg {
+  width: 320px;
+}
+.purchase-svg {
+  width: 400px;
+}
+
+.undernav-title {
+  font-size: 30px;
 }
 
 /* ========================== SIGN IN ========================== */
@@ -79,14 +226,14 @@ body {
   display: none;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 80px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+  background-color: #0006;
 }
 
 .signin-content {
@@ -94,39 +241,121 @@ body {
   margin: auto;
   padding: 50px;
   border: 1px solid #888;
-  width: 40%;
-  border-radius: 10px;
+  width: 25%;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .signin-close {
-  color: #fff9;
+  color: #fff;
   /* float: right; */
   font-size: 28px;
   cursor: pointer;
-  top: 11.3%;
-  right: 24.5%;
+  top: 8.3%;
+  right: 31.5%;
   font-family: sans-serif;
   position: fixed;
   padding: 8px 15px;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
 .signin-close:hover {
   background: #fff2;
-  border-radius: 50%;
 }
 
+.signup-container {
+  width: 75%;
+}
+.signup-container > h3 {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 5px;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #292929;
+  border-top: 1px solid #0007;
+  padding-top: 25px;
+}
+.signin-container {
+  width: 75%;
+}
+
+label {
+  margin-top: 10px;
+  padding: 0;
+  font-family: Varela Round;
+}
+
+.not-a-user {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 23px;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #555;
+  /* font-style: italic; */
+  letter-spacing: -1px;
+}
+
+.arrow,
+.arrow:before {
+  position: absolute;
+  left: 50%;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  top: 44.5%;
+  margin: -20px 0 0 -20px;
+  -webkit-transform: rotate(45deg);
+  border-left: none;
+  border-top: none;
+  border-right: 2px #0008 solid;
+  border-bottom: 2px #0008 solid;
+}
+
+.arrow:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  top: 44.5%;
+  margin: -10px 0 0 -10px;
+  border-left: none;
+  border-top: none;
+  border-right: 1px #000 solid;
+  border-bottom: 1px #000 solid;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-name: arrow;
+}
+
+@keyframes arrow {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-10px, -10px);
+  }
+}
 /* =========================== SIGN IN INPUTS =========================== */
 .fontuser {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 .fontuser i {
   color: #0007;
   position: absolute;
   left: 8px;
-  top: 25px;
+  top: 44px;
   border-right: 1px solid;
   padding-right: 6px;
 }
@@ -134,23 +363,65 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 .fontpass i {
   color: #0007;
   position: absolute;
   left: 8px;
-  top: 25px;
+  top: 44px;
   border-right: 1px solid;
   padding-right: 6px;
 }
 
 #email,
-#password {
-  padding: 5px 5px 5px 35px;
+#password,
+#signup-password,
+#signup-email {
+  padding: 13px 5px 13px 35px;
   font-size: 14px;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid #0007;
+  margin: 2px 0;
+  transition: 0.4s;
 }
 
+#email:hover,
+#password:hover,
+#signup-password:hover,
+#signup-email:hover {
+  border: 1px solid #000;
+}
+
+.signup-submit,
+.signin-submit {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.signup-submit {
+  background: #edb911;
+  color: #000;
+  transition: 0.4s;
+}
+
+.signup-submit:hover {
+  background: #fdc921;
+}
+
+.signin-submit {
+  background: #28b2f7;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.signin-submit:hover {
+  background: #1e96fc;
+}
 /* =========================== SHOPPING CART =========================== */
 #cart-popup {
   background: #aaa;

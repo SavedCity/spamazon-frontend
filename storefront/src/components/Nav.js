@@ -5,6 +5,9 @@ import SignIn from "./SignIn";
 // import Checkout from "./Checkout";
 
 class Nav extends React.Component {
+  state = {
+    quantity: 1,
+  };
   // OPEN WARNIN' MODAL IF CLEAR CART BUTTON IS PRESSED
   openClearCartModal = () => {
     document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
@@ -47,7 +50,7 @@ class Nav extends React.Component {
       let modal = document.getElementById("open-checkout-modal");
       modal.style.display = "block";
       this.closeCart();
-    }, 500);
+    }, 250);
   };
 
   closeCheckout = () => {
@@ -56,7 +59,7 @@ class Nav extends React.Component {
       let modal = document.getElementById("open-checkout-modal");
       modal.style.display = "none";
       this.openCart();
-    }, 500);
+    }, 250);
   };
 
   raiseQuantity = (event) => {
@@ -83,15 +86,15 @@ class Nav extends React.Component {
 
     this.props.showCartItems();
 
-    console.log(cartArray);
+    this.setState({});
   };
 
   lowerQuantity = (event) => {
     let cartTotal = this.props.sumOfCart;
     let cartArray = this.props.cartItems;
-    let price =
-      event.target.parentElement.previousSibling.firstChild.nextSibling
-        .nextSibling.firstChild.nextSibling.firstChild.wholeText;
+    // let price =
+    //   event.target.parentElement.previousSibling.firstChild.nextSibling
+    //     .nextSibling.firstChild.nextSibling.firstChild.wholeText;
 
     let id =
       event.target.parentElement.previousSibling.firstChild.firstChild
@@ -116,7 +119,6 @@ class Nav extends React.Component {
     cartTotal.push(sum);
 
     this.props.showCartItems();
-    console.log(cartArray);
   };
 
   // CLEARS THE SHOPPING CART
@@ -150,16 +152,56 @@ class Nav extends React.Component {
       var lastSumofArray = cartSum.slice(-1)[0].price;
     }
 
+    window.onscroll = () => {
+      let nav = document.querySelector(".nav-bar");
+      let title = document.querySelector(".title");
+      let logoCart = document.querySelector(".logo-cart");
+      let logout = document.querySelector(".logout");
+      let cart = document.querySelector(".fa-shopping-cart");
+      let signin = document.querySelector("#signin-button");
+
+      if (window.scrollY < 140) {
+        nav.classList.remove("scroll");
+        title.classList.remove("scroll");
+        logoCart.classList.remove("scroll");
+        logout.classList.remove("scroll");
+        cart.classList.remove("scroll");
+        signin.classList.remove("scroll");
+      } else {
+        nav.classList.add("scroll");
+        title.classList.add("scroll");
+        logoCart.classList.add("scroll");
+        logout.classList.add("scroll");
+        cart.classList.add("scroll");
+        signin.classList.add("scroll");
+      }
+    };
+
     return (
       <div id="main" className="nav-bar">
-        <h3 className="title">Spamazon</h3>
+        <img
+          className="logo-cart"
+          src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png"
+          alt="cart"
+        />
 
+        <h3 className="title">Spamazon</h3>
         {this.props.user ? (
-          <button className="logout" onClick={this.props.logOut}>
-            <i className="fas fa-sign-out-alt"></i> Log out
-          </button>
+          <div className="logout-before">
+            <button className="logout" onClick={this.props.logOut}>
+              <i className="fas fa-sign-out-alt"></i> Log out
+            </button>
+            <span onClick={this.openModal} id="signin-button">
+              Log In
+            </span>
+          </div>
         ) : (
-          <SignIn />
+          <div className="logout-before">
+            <span className="logout" onClick={this.props.logOut}>
+              <i className="fas fa-sign-out-alt"></i> Log out
+            </span>
+            <SignIn />
+          </div>
         )}
 
         <div>
@@ -215,7 +257,7 @@ class Nav extends React.Component {
             {lengthOfCart > 1 ? (
               <div className="cart-subtotal-div">
                 <h1 className="subtotal-in-cart">Subtotal </h1>
-                <h1 className="price-in-cart">${lastSumofArray}</h1>
+                <h1 className="price-in-cart">${lastSumofArray}.00</h1>
               </div>
             ) : null}
 

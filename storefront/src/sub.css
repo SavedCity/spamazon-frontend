@@ -24,29 +24,16 @@
   justify-content: flex-start;
 }
 
-<<<<<<< HEAD
 html {
   /* background: var(--main); */
 }
-=======
 /* html {
     background: var(--main);
 } */
->>>>>>> 9cb2c6bf5367aed75af3baf63285e4e1dcc27d24
-.nav-bar {
-  background: var(--blue_accent);
-}
-
-h1 {
-  /* color: var(--red_accent); */
-}
 
 #creator {
   color: var(--tan);
   font-weight: bolder;
-}
-.logout {
-  background: var(--red_accent);
 }
 
 .btn1 {
@@ -55,17 +42,14 @@ h1 {
 
 .items {
   width: 25em;
-  height: 25%;
+  /* height: 25%; */
   font-family: "Open Sans", sans-serif;
 }
 /* body{
     font-family: 'Open Sans', sans-serif;
 } */
-.title {
-  font-family: "Kaushan Script", cursive;
-}
 
 .footer {
-    background: var(--tan);
-    opacity: 50%;
+  background: var(--tan);
+  opacity: 50%;
 }
