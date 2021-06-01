@@ -2,18 +2,24 @@ import React from 'react';
 
 class ProductDetail extends React.Component {
 
+    close = (e) => {
+      const modalBackground = document.querySelector('.product-modal-background')
+      if (e.target.classList.contains('product-modal-background')) {
+        modalBackground.classList.toggle('hide')
+      }
+    }
 
     render = () => {
 
       return (
-        <div id="active-product">
-<<<<<<< HEAD
-            <h2> {this.props.activeProduct.name} </h2>
-=======
+        <div id="active-product-modal" className="product-modal-background hide" onClick={this.close}>
+          <div className="product-modal">
             <h2>  {this.props.activeProduct.name} </h2>
->>>>>>> e0421f241b90b7e9db788e5b3bfb325ec13ff34e
-            <img className="product-img" src={this.props.activeProduct.image} alt="" />
-            <h4> {this.props.activeProduct.description} </h4>
+            <img className="product-img" src={this.props.activeProduct.image} alt={this.props.activeProduct.name} />
+            <h4> {this.props.activeProduct.created_by} </h4>
+            <h4> {this.props.activeProduct.price} </h4>
+            <p> {this.props.activeProduct.description} </p>
+          </div>
         </div>
       )
     }

@@ -10,7 +10,7 @@ class Products extends React.Component {
     this.setState({
       activeProduct: productObject,
     });
-    document.getElementById("active-product").classList.toggle("hide");
+    document.getElementById("active-product-modal").classList.toggle("hide");
   };
 
   render() {
