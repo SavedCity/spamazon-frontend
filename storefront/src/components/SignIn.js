@@ -94,8 +94,10 @@ class SignIn extends React.Component {
 
                 <input className="signin-submit" type="submit" value="Login" />
                 <h3 className="not-a-user">NOT A USER?</h3>
-                <div className="arrow"></div>
               </form>
+            </div>
+            <div class="arrow2 bounce">
+              <a class="fa fa-arrow-down fa-2x"></a>
             </div>
 
             <SignUp />

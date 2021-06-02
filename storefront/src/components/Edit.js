@@ -39,51 +39,74 @@ export default class Edit extends Component {
       <div>
         {this.props.user.email === this.props.item.created_by ? (
           <details>
-            <summary>Edit</summary>
-            <form id={this.props.item.id} onSubmit={this.handleSubmit}>
-              <label htmlFor=""> Name </label>
+            <summary>
+              <span class="summary-title">Need to update?</span>
+              <div class="summary-chevron-up">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="feather feather-chevron-down"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </summary>
+            <form
+              className="edit-form"
+              id={this.props.item.id}
+              onSubmit={this.handleSubmit}
+            >
+              <label htmlFor=""> Title </label>
               <input
                 title="Must be between 5-64 characters long"
                 required
-                pattern="[a-zA-Z\W]{5,64}"
+                pattern="[a-zA-Z\W0-9]{5,64}"
                 type="text"
                 id="name"
                 onChange={this.handleChange}
                 value={this.state.name}
-                placeholder={this.props.item.name}
+                placeholder="Title"
               />
 
               <label htmlFor=""> Price </label>
               <input
                 step="0.01"
-                min="0"
+                min="1"
                 max="999999999"
                 required
                 type="number"
                 id="price"
                 onChange={this.handleChangeNumbers}
                 value={this.state.price}
-                placeholder={this.props.item.price}
+                placeholder="Price"
               />
 
               <label htmlFor=""> Description </label>
-              <input
+              <textarea
                 title="Length must not exceed 300 characters"
-                pattern="[a-zA-Z\W]{0,300}"
+                pattern="[a-zA-Z\W0-9]{0,300}"
                 type="text"
                 id="description"
                 onChange={this.handleChange}
                 value={this.state.description}
-                placeholder={this.props.item.description}
-              />
+                placeholder="Description"
+              ></textarea>
 
               <label htmlFor=""> Image </label>
               <input
                 type="text"
                 id="image"
+                required
                 onChange={this.handleChange}
                 value={this.state.image}
-                placeholder={this.props.item.image}
+                placeholder="Image"
               />
 
               <input
@@ -92,12 +115,12 @@ export default class Edit extends Component {
                 value={this.state.created_by}
               />
 
-              <input type="submit" value="edit Item" />
+              <input className="edit-submit" type="submit" value="UPDATE" />
               <button
                 value={this.props.item.id}
                 onClick={this.props.deleteProduct}
               >
-                Delete
+                REMOVE
               </button>
             </form>
           </details>

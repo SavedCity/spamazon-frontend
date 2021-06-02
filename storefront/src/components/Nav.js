@@ -144,6 +144,23 @@ class Nav extends React.Component {
     }, 250);
   };
 
+  addDefaultSrc = (ev) => {
+    ev.target.src =
+      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
+  };
+
+  purchasing = () => {
+    var twoToneButton = document.querySelector(".place-order-button");
+
+    twoToneButton.innerHTML = "PLACING ORDER";
+    twoToneButton.classList.add("spinning");
+
+    setTimeout(function () {
+      twoToneButton.classList.remove("spinning");
+      twoToneButton.innerHTML = "PLACE ORDER";
+    }, 3000);
+  };
+
   render() {
     // CART ITEMS
     let array = this.props.cartItems;
@@ -171,7 +188,7 @@ class Nav extends React.Component {
       let sell = document.querySelector(".sell-title");
 
       // NAV BAR ON SCROLL CHANGES CSS
-      if (window.scrollY < 140) {
+      if (window.scrollY < 180) {
         nav.classList.remove("scroll");
         title.classList.remove("scroll");
         logoCart.classList.remove("scroll");
@@ -242,7 +259,10 @@ class Nav extends React.Component {
         <div id="cart-popup">
           <div id="cart-content">
             {lengthOfCart > 1 ? (
-              <h2 className="cart-title">Your cart</h2>
+              <h2 className="cart-title">
+                <span style={{ color: "#0077b6" }}>Your cart </span> - $
+                {lastSumofArray}.00
+              </h2>
             ) : (
               <h2 className="cart-title">Your cart is empty</h2>
             )}
@@ -256,6 +276,7 @@ class Nav extends React.Component {
                       className="cart-img"
                       src={item.image}
                       alt={item.name}
+                      onError={this.addDefaultSrc}
                     />
 
                     <div className="cart-details-div">
@@ -321,7 +342,7 @@ class Nav extends React.Component {
                             </label>
                           </div>
 
-                          <h2 className="shipping-address">Shippind address</h2>
+                          <h2 className="shipping-address">Shipping address</h2>
                           <div className="name-div">
                             <input type="text" placeholder="First Name" />
                             <input type="text" placeholder="Last Name" />
@@ -395,7 +416,10 @@ class Nav extends React.Component {
                           <input type="text" placeholder="Phone" />
 
                           <div>
-                            <button className="place-order-button">
+                            <button
+                              onClick={this.purchasing}
+                              className="place-order-button"
+                            >
                               PLACE ORDER
                             </button>
                             <button
@@ -415,6 +439,7 @@ class Nav extends React.Component {
                                     className="checkout-img"
                                     src={item.image}
                                     alt={item.name}
+                                    onError={this.addDefaultSrc}
                                   />
 
                                   <h1 className="checkout-name">{item.name}</h1>
@@ -422,6 +447,7 @@ class Nav extends React.Component {
 
                                 <div>
                                   <h2 className="checkout-price">
+                                    <span style={{ color: "#52b788" }}></span>
                                     {item.price}
                                   </h2>
                                 </div>
@@ -443,7 +469,7 @@ class Nav extends React.Component {
                           <div className="checkout-subtotal-div">
                             <h3 className="checkout-subtotal">Subtotal</h3>
                             <h3 className="checkout-subtotal-price">
-                              ${lastSumofArray}
+                              ${lastSumofArray}.00
                             </h3>
                           </div>
                           <div className="checkout-taxes-div">
@@ -455,7 +481,7 @@ class Nav extends React.Component {
                           <div className="checkout-total-div">
                             <h3 className="checkout-total">Total</h3>
                             <h3 className="checkout-total-price">
-                              ${lastSumofArray}
+                              ${lastSumofArray}.00
                             </h3>
                           </div>
                         </div>
@@ -478,24 +504,30 @@ class Nav extends React.Component {
 
                 <div id="open-cart-warning">
                   <div className="cart-warning-content">
-                    <h2 className="clear-cart-title">
-                      These items will be cleared from your cart
-                    </h2>
+                    <i className="far fa-times-circle"></i>
+                    <h2 className="clear-cart-title">ARE YOU SURE?</h2>
                     {unique.slice(1).map((item) => {
                       return (
                         <div>
-                          <h4>{item.name}</h4>
-                          <p>{item.price}</p>
+                          <h4 className="clear-cart-name">{item.name}</h4>
+                          <p className="clear-cart-price">{item.price}</p>
                         </div>
                       );
                     })}
-                    <button onClick={this.clearCart}>CLEAR CART</button>
-                    <button
-                      className="close-cart-warning"
-                      onClick={this.closeClearCartModal}
-                    >
-                      CANCEL
-                    </button>
+                    <div className="modal-button-div">
+                      <button
+                        className="clear-cart-button"
+                        onClick={this.clearCart}
+                      >
+                        CLEAR CART
+                      </button>
+                      <button
+                        className="close-cart-warning"
+                        onClick={this.closeClearCartModal}
+                      >
+                        CANCEL
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
