@@ -153,6 +153,8 @@ class App extends React.Component {
           deleteProduct={this.deleteProduct}
           user={this.state.user}
         />
+
+        <Footer />
       </div>
     );
   };

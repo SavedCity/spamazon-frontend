@@ -41,6 +41,9 @@ export default class AddForm extends Component {
       created_by: "",
     });
     document.getElementById("form-image").src = "";
+    setTimeout(() => {
+      this.closePostModal();
+    }, 0);
   };
 
   closePostModal = () => {
@@ -49,6 +52,11 @@ export default class AddForm extends Component {
       let modal = document.getElementById("create-form-modal");
       modal.style.display = "none";
     }, 250);
+  };
+
+  addDefaultSrc = (ev) => {
+    ev.target.src =
+      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
   };
 
   render() {
@@ -77,6 +85,7 @@ export default class AddForm extends Component {
                     <label htmlFor=""> </label>
                     <input
                       placeholder="Image URL *"
+                      required
                       type="text"
                       id="image"
                       onChange={this.handleImageChange}
@@ -124,15 +133,16 @@ export default class AddForm extends Component {
             <button className="post-back" onClick={this.closePostModal}>
               CANCEL
             </button>
+            <h3 className="preview-title">IMAGE PREVIEW</h3>
 
             <h1>Sell something great!</h1>
             <img className="post-svg" src="/images/post.svg" alt="post" />
           </div>
           <div className="post-image">
             <img
-              src="https://www.penworthy.com/Image/Getimage?id=C:\Repositories\Common\About%20Us\Slide1.jpg"
+              src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png"
               id="form-image"
-              alt=""
+              onError={this.addDefaultSrc}
             />
           </div>
         </div>

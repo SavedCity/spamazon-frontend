@@ -2,30 +2,51 @@ import React from "react";
 
 class ProductDetail extends React.Component {
   close = (e) => {
-    document.getElementsByTagName("BODY")[0].style.overflow = "auto";
+    // document.getElementsByTagName("BODY")[0].style.overflow = "auto";
     const modalBackground = document.querySelector(".product-modal-background");
     if (e.target.classList.contains("product-modal-background")) {
       modalBackground.classList.toggle("hide");
     }
   };
 
+  addDefaultSrc = (ev) => {
+    ev.target.src =
+      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
+  };
+
   render = () => {
     return (
       <div
+        onClick={this.close}
         id="active-product-modal"
         className="product-modal-background hide"
-        onClick={this.close}
       >
         <div className="product-modal">
-          <h2> {this.props.activeProduct.name} </h2>
-          <img
-            className="product-img"
-            src={this.props.activeProduct.image}
-            alt={this.props.activeProduct.name}
-          />
-          <h4> {this.props.activeProduct.created_by} </h4>
-          <h4> {this.props.activeProduct.price} </h4>
-          <p> {this.props.activeProduct.description} </p>
+          <div className="product-left-div">
+            <h6>
+              <span style={{ color: "#333" }}>Date posted: </span>
+              {this.props.activeProduct.created_at}
+            </h6>
+            <h5>
+              <span style={{ color: "#333" }}>Seller: </span>
+              {this.props.activeProduct.created_by}
+            </h5>
+            <h4> {this.props.activeProduct.name} </h4>
+            <img
+              className="product-img-modal"
+              src={this.props.activeProduct.image}
+              alt={this.props.activeProduct.name}
+              onError={this.addDefaultSrc}
+            />
+            <h3>
+              <span style={{ color: "#282828" }}> Price: </span>
+              {this.props.activeProduct.price}
+            </h3>
+          </div>
+          <div className="product-right-div">
+            <h1>DESCRIPTION</h1>
+            <h2> {this.props.activeProduct.description} </h2>
+          </div>
         </div>
       </div>
     );

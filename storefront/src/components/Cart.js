@@ -110,7 +110,7 @@ class Cart extends React.Component {
               ADD TO CART
             </button>
           ) : (
-            <button className="already-in-cart">CART LIMIT REACHED</button>
+            <button className="cart-limit-reached">CART LIMIT REACHED</button>
           )}
         </div>
       </div>

@@ -7,10 +7,15 @@ class ViewProduct extends React.Component {
   findProduct = (e) => {
     let products = this.props.products;
     for (let i = 0; i < products.length; i++) {
-      if (e.target.id == products[i].id) {
+      if (e.target.previousSibling.id == products[i].id) {
         this.props.toggleActiveProduct(products[i]);
       }
     }
+  };
+
+  addDefaultSrc = (ev) => {
+    ev.target.src =
+      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
   };
 
   render() {
@@ -29,22 +34,17 @@ class ViewProduct extends React.Component {
                       id={item.id}
                       src={item.image}
                       alt={item.name}
-                      onClick={this.findProduct}
+                      onError={this.addDefaultSrc}
                     />
+                    <button onClick={this.findProduct} className="view-button">
+                      VIEW
+                    </button>
                   </div>
 
-                  <h2> {item.name} </h2>
+                  <h2 className="item-name"> {item.name} </h2>
 
-                  <h2>${item.price} </h2>
+                  <h2 className="item-price">${item.price} </h2>
 
-                  {this.props.user ? (
-                    <Edit
-                      user={this.props.user}
-                      item={item}
-                      updateProduct={this.props.updateProduct}
-                      deleteProduct={this.props.deleteProduct}
-                    />
-                  ) : null}
                   <Cart
                     triggerCartLimitDown={this.props.triggerCartLimitDown}
                     triggerCartLimitUp={this.props.triggerCartLimitUp}
@@ -56,6 +56,14 @@ class ViewProduct extends React.Component {
                     cartItems={this.props.cartItems}
                     cartLimit={this.props.cartLimit}
                   />
+                  {this.props.user ? (
+                    <Edit
+                      user={this.props.user}
+                      item={item}
+                      updateProduct={this.props.updateProduct}
+                      deleteProduct={this.props.deleteProduct}
+                    />
+                  ) : null}
                 </div>
               );
             })}

@@ -10,13 +10,23 @@ class Products extends React.Component {
     this.setState({
       activeProduct: productObject,
     });
-    document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
+    // document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
     document.getElementById("active-product-modal").classList.toggle("hide");
   };
 
   render() {
     return (
       <div>
+        <h1 className="product-title">
+          FIND WHAT YOUR DESERVE,
+          <span style={{ color: "#0077b699" }}> FIND SOMETHING NEW</span>
+        </h1>
+        {this.props.user ? (
+          <div className="arrow"></div>
+        ) : (
+          <div className="arrow-before"></div>
+        )}
+
         <ViewProduct
           triggerCartLimitDown={this.props.triggerCartLimitDown}
           triggerCartLimitUp={this.props.triggerCartLimitUp}
