@@ -40,6 +40,22 @@ body {
   text-shadow: 2px 2px 5px #0004;
 }
 
+.username {
+  font: 600 1.3rem roboto;
+  margin: 15px 0 0 50px;
+  background-color: #28aac455;
+  padding: 5px 20px 7px 20px;
+  /* line-height: 30px; */
+  height: 20px;
+  border-radius: 3px;
+  letter-spacing: 1.2px;
+}
+
+.username.scroll {
+  color: #fff;
+  background-color: transparent;
+}
+
 .logo-cart {
   width: 39px;
   height: 39px;
@@ -100,7 +116,9 @@ body {
   right: 100px;
   top: 16px;
   transition: 0.5s;
+  font-weight: 700;
 }
+
 #signin-button.scroll {
   color: #000;
   background: #fff;
@@ -244,7 +262,7 @@ body {
 #signin-modal {
   display: none;
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 2; /* Sit on top */
   padding-top: 70px; /* Location of the box */
   left: 0;
   top: 0;
@@ -257,7 +275,7 @@ body {
 
 .signin-content {
   background-color: #fefefe;
-  margin: auto;
+  margin: 20px auto;
   padding: 50px;
   border: 1px solid #888;
   width: 25%;
@@ -330,7 +348,7 @@ label {
 .arrow {
   width: 40px;
   height: 40px;
-  top: 114.5%;
+  top: 7rem;
   margin: -20px 0 0 -20px;
   -webkit-transform: rotate(45deg);
   border-left: none;
@@ -433,6 +451,19 @@ label {
   }
 }
 /* =========================== SIGN IN INPUTS =========================== */
+.sign-in-error {
+  font: 500 1.1rem kanit;
+  color: #900;
+  /* position: absolute; */
+  text-align: center;
+  margin: 0 auto;
+  height: 0;
+  background-color: #400;
+  /* overflow: visible; */
+  /* visibility: hidden; */
+  /* transition: 0.3s; */
+}
+
 .fontuser {
   position: relative;
   display: flex;
@@ -484,7 +515,8 @@ label {
 }
 
 .signup-submit,
-.signin-submit {
+.signin-submit,
+.guest-login {
   width: 100%;
   padding: 10px;
   margin-top: 20px;
@@ -496,6 +528,8 @@ label {
   background: #edb911;
   color: #000;
   transition: 0.4s;
+  font: 400 1.2rem kanit;
+  padding: 5px 0;
 }
 
 .signup-submit:hover {
@@ -506,10 +540,29 @@ label {
   background: #28b2f7;
   color: #fff;
   transition: 0.4s;
+  font: 400 1.2rem kanit;
+  padding: 5px 0;
 }
 
 .signin-submit:hover {
   background: #1e96fc;
+}
+
+.guest-login {
+  background: #fff;
+  color: #282828;
+  transition: 0.4s;
+  font: 400 1rem kanit;
+  padding: 5px 0;
+  margin-left: 7px;
+  width: 60%;
+  height: 40px;
+  border: 1px solid #282828;
+}
+
+.guest-login:hover {
+  background-color: #282828;
+  color: #fff;
 }
 /* =========================== SHOPPING CART =========================== */
 #cart-popup {
@@ -1116,10 +1169,10 @@ label {
   flex-direction: column;
   /* margin: 0px; */
   width: 17%;
-  /* height: 500px; */
   /* background: #0006; */
   height: 500px;
   margin-bottom: 90px;
+  position: relative;
 }
 
 .image-div {
@@ -1142,19 +1195,19 @@ label {
   flex-flow: wrap;
   justify-content: center;
   align-items: flex-start;
-
-  /* width: 10%; */
 }
 
 .item-name {
   font-family: Varela Round;
   font-weight: 900;
-  width: 70%;
+  /* width: 30%; */
   text-align: left;
   font-size: 17px;
   margin-top: 0;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   padding-top: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .item-price {
@@ -1178,7 +1231,7 @@ label {
   cursor: pointer;
   width: 160px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 20px 0 0 23px;
   transition: 0.3s;
 }
 
@@ -1310,7 +1363,7 @@ label {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 50%;
+  /* width: 50%; */
   background: #4cc9f044;
   padding: 60px 90px 90px 90px;
   border-radius: 5px;
@@ -1319,7 +1372,7 @@ label {
 
 .title-price-div {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 }
 
@@ -1331,7 +1384,12 @@ label {
   outline-color: #000;
   font-size: 17px;
   font-family: sans-serif;
-  width: 260px;
+  /* width: 260px; */
+}
+
+.title-price-div > div {
+  display: flex;
+  flex-direction: column;
 }
 
 .create-form-div > input {
@@ -1425,7 +1483,7 @@ label {
   border-radius: 3px;
   cursor: pointer;
   font-size: 20px;
-  margin-left: 17%;
+  margin-left: 19%;
   margin-top: 12px;
   transition: 0.4s;
   font-weight: 900;
@@ -1626,13 +1684,14 @@ details[open] {
   border: none;
   background: #00b4d8;
   color: #fff;
-  padding: 3px 12px 7px 12px;
+  padding: 3px 20px 7px 20px;
   border-radius: 0 0 50px 50px;
   transition: 0.3s;
   cursor: pointer;
   font-weight: 600;
   font-family: kanit;
   letter-spacing: 1px;
+  font-size: 1rem;
 }
 .view-button:hover {
   background: #000;
@@ -1698,8 +1757,7 @@ details[open] {
 .personal-divs > h1 {
   font-family: Padauk;
   font-weight: 400;
-  border-right: 1px solid #0006;
-  padding-right: 40px;
+  /* padding-right: 40px; */
   color: #666;
 }
 .personal-divs3 > h1 {
@@ -1763,7 +1821,7 @@ details[open] {
   color: lighten(#000, 20%);
 }
 
-.place-order-button:active {
+/* .place-order-button:active {
   box-shadow: 0 0 10px darken(#00f5d4, 10%) inset,
     0px 1px 0 lighten(#00f5d4, 10%);
   color: lighten(@color, 30%);
@@ -1775,7 +1833,7 @@ details[open] {
     darken(#00f5d4, 5%) 51%,
     darken(#00f5d4, 10%) 100%
   );
-}
+} */
 
 .place-order-button.spinning {
   background-color: #00f5d4;
@@ -1817,5 +1875,49 @@ details[open] {
     width: 15px;
     height: 15px;
     margin: -8px 5px 0 0;
+  }
+}
+
+/* Loading products */
+
+.loading-h1 {
+  font: 600 2rem Padauk;
+  text-align: center;
+  margin-bottom: 10rem;
+}
+
+.lds-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 10rem auto auto auto;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #282828;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #282828 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

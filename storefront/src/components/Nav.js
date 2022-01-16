@@ -44,22 +44,18 @@ class Nav extends React.Component {
   // ===================== OPEN/CLOSE PROCEED TO CHECKOUT ====================
 
   openCheckout = () => {
-    setTimeout(() => {
-      // document.getElementById("cart-content").style.overflow = "hidden";
-      document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
-      let modal = document.getElementById("open-checkout-modal");
-      modal.style.display = "block";
-      this.closeCart();
-    }, 250);
+    // document.getElementById("cart-content").style.overflow = "hidden";
+    document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
+    let modal = document.getElementById("open-checkout-modal");
+    modal.style.display = "block";
+    this.closeCart();
   };
 
   closeCheckout = () => {
-    setTimeout(() => {
-      document.getElementsByTagName("BODY")[0].style.overflow = "auto";
-      let modal = document.getElementById("open-checkout-modal");
-      modal.style.display = "none";
-      this.openCart();
-    }, 250);
+    document.getElementsByTagName("BODY")[0].style.overflow = "auto";
+    let modal = document.getElementById("open-checkout-modal");
+    modal.style.display = "none";
+    this.openCart();
   };
 
   raiseQuantity = (event) => {
@@ -145,8 +141,7 @@ class Nav extends React.Component {
   };
 
   addDefaultSrc = (ev) => {
-    ev.target.src =
-      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
+    ev.target.src = "../favicon.ico";
   };
 
   purchasing = () => {
@@ -186,6 +181,7 @@ class Nav extends React.Component {
       let signin = document.querySelector("#signin-button");
       let plus = document.querySelector(".fa-plus");
       let sell = document.querySelector(".sell-title");
+      let user = document.querySelector(".username");
 
       // NAV BAR ON SCROLL CHANGES CSS
       if (window.scrollY < 180) {
@@ -195,8 +191,12 @@ class Nav extends React.Component {
         logout.classList.remove("scroll");
         cart.classList.remove("scroll");
         signin.classList.remove("scroll");
-        plus.classList.remove("scroll");
-        sell.classList.remove("scroll");
+
+        if (this.props.user) {
+          plus.classList.remove("scroll");
+          sell.classList.remove("scroll");
+          user.classList.remove("scroll");
+        }
       } else {
         nav.classList.add("scroll");
         title.classList.add("scroll");
@@ -204,20 +204,29 @@ class Nav extends React.Component {
         logout.classList.add("scroll");
         cart.classList.add("scroll");
         signin.classList.add("scroll");
-        plus.classList.add("scroll");
-        sell.classList.add("scroll");
+
+        if (this.props.user) {
+          plus.classList.add("scroll");
+          sell.classList.add("scroll");
+          user.classList.add("scroll");
+        }
       }
     };
 
     return (
       <div id="main" className="nav-bar">
-        <img
-          className="logo-cart"
-          src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png"
-          alt="cart"
-        />
+        <img className="logo-cart" src="../favicon.ico" alt="cart" />
 
         <h3 className="title">Spamazon</h3>
+        {this.props.user && (
+          <h3 className="username">
+            Hi{" "}
+            {this.props.user.email.split("@")[0].charAt(0).toUpperCase() +
+              this.props.user.email.split("@")[0].slice(1)}
+            !
+          </h3>
+        )}
+
         {this.props.user ? (
           <div className="logout-before">
             <button className="logout" onClick={this.props.logOut}>
@@ -236,15 +245,10 @@ class Nav extends React.Component {
           </div>
         )}
 
-        {this.props.user ? (
+        {this.props.user && (
           <div className="sell-div">
             <h2 className="sell-title">Have something to sell?</h2>
             <i onClick={this.openPostModal} className="fas fa-plus"></i>
-          </div>
-        ) : (
-          <div className="sell-div-before">
-            <h2 className="sell-title">Login to sell with us</h2>
-            <i className="fas fa-plus"></i>
           </div>
         )}
 
@@ -260,7 +264,7 @@ class Nav extends React.Component {
           <div id="cart-content">
             {lengthOfCart > 1 ? (
               <h2 className="cart-title">
-                <span style={{ color: "#0077b6" }}>Your cart </span> - $
+                <span style={{ color: "#0077b6" }}>Your cart </span> $
                 {lastSumofArray}.00
               </h2>
             ) : (
@@ -291,12 +295,12 @@ class Nav extends React.Component {
                     <i
                       title="Raise Quantity"
                       onClick={this.raiseQuantity}
-                      class="fas fa-chevron-up"
+                      className="fas fa-chevron-up"
                     ></i>
                     <i
                       title="Lower Quantity"
                       onClick={this.lowerQuantity}
-                      class="fas fa-chevron-down"
+                      className="fas fa-chevron-down"
                     ></i>
                   </div>
                 </div>

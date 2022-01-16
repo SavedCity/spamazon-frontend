@@ -6,6 +6,9 @@ class SignIn extends React.Component {
   state = {
     email: "",
     password: "",
+    wrongCredentials: false,
+    requestExceeded: false,
+    userNotFound: false,
   };
 
   login = (event) => {
@@ -17,7 +20,35 @@ class SignIn extends React.Component {
         console.log(user);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.code);
+        if (err.code === "auth/wrong-password") {
+          this.setState({
+            wrongCredentials: true,
+          });
+          setTimeout(() => {
+            this.setState({
+              wrongCredentials: false,
+            });
+          }, 2500);
+        } else if (err.code === "auth/too-many-requests") {
+          this.setState({
+            requestExceeded: true,
+          });
+          setTimeout(() => {
+            this.setState({
+              requestExceeded: false,
+            });
+          }, 2500);
+        } else if (err.code === "auth/user-not-found") {
+          this.setState({
+            userNotFound: true,
+          });
+          setTimeout(() => {
+            this.setState({
+              userNotFound: false,
+            });
+          }, 2500);
+        }
       });
   };
 
@@ -45,6 +76,13 @@ class SignIn extends React.Component {
     }
   };
 
+  guestLogin = () => {
+    this.setState({
+      email: "anonymous@spamazon.com",
+      password: "trustcc",
+    });
+  };
+
   render() {
     return (
       <div onClick={this.closeModalWindow}>
@@ -59,10 +97,26 @@ class SignIn extends React.Component {
                 <span onClick={this.closeModal} className="signin-close">
                   X
                 </span>
-                <div className="fontuser">
-                  <label className="email-title" htmlFor="">
-                    Email
-                  </label>
+
+                {this.state.wrongCredentials ? (
+                  <h4 className="sign-in-error">Wrong email or password</h4>
+                ) : this.state.requestExceeded ? (
+                  <h4
+                    style={{ marginBottom: "40px" }}
+                    className="sign-in-error"
+                  >
+                    Sign in attempt reached. Try again in a few minutes
+                  </h4>
+                ) : (
+                  this.state.userNotFound && (
+                    <h4 className="sign-in-error">
+                      No user found with this email
+                    </h4>
+                  )
+                )}
+
+                <div style={{ marginTop: "17px" }} className="fontuser">
+                  <label htmlFor="email">Email</label>
                   <input
                     required
                     title="Please fill out this field in email format"
@@ -78,7 +132,7 @@ class SignIn extends React.Component {
                 </div>
 
                 <div className="fontpass">
-                  <label htmlFor="">Password </label>
+                  <label htmlFor="password">Password </label>
                   <input
                     required
                     pattern="[a-zA-Z\W0-9]{6,16}"
@@ -91,13 +145,27 @@ class SignIn extends React.Component {
                   />
                   <i className="fas fa-lock"></i>
                 </div>
-
-                <input className="signin-submit" type="submit" value="Login" />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                  }}
+                >
+                  <input
+                    className="signin-submit"
+                    type="submit"
+                    value="Login"
+                  />
+                  <button onClick={this.guestLogin} className="guest-login">
+                    Guest Login
+                  </button>
+                </div>
                 <h3 className="not-a-user">NOT A USER?</h3>
               </form>
             </div>
-            <div class="arrow2 bounce">
-              <a class="fa fa-arrow-down fa-2x"></a>
+            <div className="arrow2 bounce">
+              <i className="fa fa-arrow-down fa-2x"></i>
             </div>
 
             <SignUp />

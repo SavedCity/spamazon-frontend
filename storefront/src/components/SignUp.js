@@ -5,6 +5,7 @@ class SignUp extends React.Component {
   state = {
     email: "",
     password: "",
+    emailInUse: false,
   };
 
   signUp = (event) => {
@@ -17,6 +18,16 @@ class SignUp extends React.Component {
       })
       .catch((err) => {
         console.log(err);
+        if (err.code === "auth/email-already-in-use") {
+          this.setState({
+            emailInUse: true,
+          });
+          setTimeout(() => {
+            this.setState({
+              emailInUse: false,
+            });
+          }, 2500);
+        }
       });
     console.log(fire);
   };
@@ -30,11 +41,17 @@ class SignUp extends React.Component {
   render() {
     return (
       <div className="signup-container">
-        <h3>Sign Up</h3>
-        <form onSubmit={this.signup}>
+        {this.state.emailInUse ? (
+          <h4 style={{ marginBottom: "38px" }} className="sign-in-error">
+            Email already in use.
+          </h4>
+        ) : (
+          <h3>Sign Up</h3>
+        )}
+        <form onSubmit={this.signUp}>
           <div className="signup-form">
             <div className="fontuser">
-              <label htmlFor=""> Email </label>
+              <label htmlFor="signup-email"> New Email </label>
               <input
                 required
                 title="Must follow email format eg. michael@spamazon.com"
@@ -50,7 +67,7 @@ class SignUp extends React.Component {
             </div>
 
             <div className="fontpass">
-              <label htmlFor=""> Password </label>
+              <label htmlFor="signup-password"> New Password </label>
               <input
                 required
                 title="Password must be between 6-16 characters"

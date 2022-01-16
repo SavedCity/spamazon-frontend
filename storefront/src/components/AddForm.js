@@ -55,8 +55,7 @@ export default class AddForm extends Component {
   };
 
   addDefaultSrc = (ev) => {
-    ev.target.src =
-      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
+    ev.target.src = "../favicon.ico";
   };
 
   render() {
@@ -70,7 +69,7 @@ export default class AddForm extends Component {
 
                 <div className="title-price-div">
                   <div>
-                    <label htmlFor=""> </label>
+                    <label htmlFor="price">Price</label>
                     <input
                       min="1"
                       placeholder="Price *"
@@ -82,7 +81,7 @@ export default class AddForm extends Component {
                     />
                   </div>
                   <div>
-                    <label htmlFor=""> </label>
+                    <label htmlFor="image">Image</label>
                     <input
                       placeholder="Image URL *"
                       required
@@ -94,19 +93,19 @@ export default class AddForm extends Component {
                     />
                   </div>
                 </div>
-                <label htmlFor=""> </label>
+                <label htmlFor="title">Title</label>
                 <input
                   placeholder="Title *"
                   title="Must be between 5-64 characters long"
                   required
                   pattern="[a-zA-Z\W0-9]{5,64}"
                   type="text"
-                  id="name"
+                  id="title"
                   onChange={this.handleChange}
                   value={this.state.name}
                 />
 
-                <label htmlFor=""> </label>
+                <label htmlFor="description">Description</label>
                 <textarea
                   placeholder="Brief description of the product you are selling with Spamazon *"
                   title="Length must not exceed 300 characters"
@@ -140,9 +139,10 @@ export default class AddForm extends Component {
           </div>
           <div className="post-image">
             <img
-              src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png"
+              src="../favicon.ico"
               id="form-image"
               onError={this.addDefaultSrc}
+              alt="shopping cart"
             />
           </div>
         </div>

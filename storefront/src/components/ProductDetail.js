@@ -10,8 +10,7 @@ class ProductDetail extends React.Component {
   };
 
   addDefaultSrc = (ev) => {
-    ev.target.src =
-      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
+    ev.target.src = "../favicon.ico";
   };
 
   render = () => {

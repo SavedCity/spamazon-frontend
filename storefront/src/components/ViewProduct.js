@@ -7,6 +7,7 @@ class ViewProduct extends React.Component {
   findProduct = (e) => {
     let products = this.props.products;
     for (let i = 0; i < products.length; i++) {
+      // eslint-disable-next-line
       if (e.target.previousSibling.id == products[i].id) {
         this.props.toggleActiveProduct(products[i]);
       }
@@ -14,8 +15,7 @@ class ViewProduct extends React.Component {
   };
 
   addDefaultSrc = (ev) => {
-    ev.target.src =
-      "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fsilverstallionagency.com%2Fwp-content%2Fuploads%2F2013%2F01%2Fecommerce-saas-integration.png";
+    ev.target.src = "../favicon.ico";
   };
 
   render() {
@@ -41,21 +41,30 @@ class ViewProduct extends React.Component {
                     </button>
                   </div>
 
-                  <h2 className="item-name"> {item.name} </h2>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      flexDirection: "column",
+                      width: "70%",
+                    }}
+                  >
+                    <h2 className="item-name"> {item.name} </h2>
 
-                  <h2 className="item-price">${item.price} </h2>
+                    <h2 className="item-price">${item.price} </h2>
 
-                  <Cart
-                    triggerCartLimitDown={this.props.triggerCartLimitDown}
-                    triggerCartLimitUp={this.props.triggerCartLimitUp}
-                    item={item}
-                    user={this.props.user}
-                    checkoutOpenedOnce={this.props.checkoutOpenedOnce}
-                    sumOfCart={this.props.sumOfCart}
-                    showCartItems={this.props.showCartItems}
-                    cartItems={this.props.cartItems}
-                    cartLimit={this.props.cartLimit}
-                  />
+                    <Cart
+                      triggerCartLimitDown={this.props.triggerCartLimitDown}
+                      triggerCartLimitUp={this.props.triggerCartLimitUp}
+                      item={item}
+                      user={this.props.user}
+                      checkoutOpenedOnce={this.props.checkoutOpenedOnce}
+                      sumOfCart={this.props.sumOfCart}
+                      showCartItems={this.props.showCartItems}
+                      cartItems={this.props.cartItems}
+                      cartLimit={this.props.cartLimit}
+                    />
+                  </div>
                   {this.props.user ? (
                     <Edit
                       user={this.props.user}

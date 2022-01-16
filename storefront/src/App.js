@@ -10,6 +10,7 @@ import Footer from "./components/footer";
 
 class App extends React.Component {
   state = {
+    loading: true,
     products: [],
     user: null,
     cartItems: [{ price: 0 }],
@@ -29,17 +30,20 @@ class App extends React.Component {
   // FOR CART LIMITATION OF 6 ITEMS
   triggerCartLimitUp = () => {
     this.setState({
+      // eslint-disable-next-line
       cartLimit: (this.state.cartLimit += 1),
     });
   };
   triggerCartLimitDown = () => {
     this.setState({
+      // eslint-disable-next-line
       cartLimit: (this.state.cartLimit -= 1),
     });
   };
 
   triggerCartLimitReset = () => {
     this.setState({
+      // eslint-disable-next-line
       cartLimit: (this.state.cartLimit = 0),
     });
   };
@@ -78,10 +82,12 @@ class App extends React.Component {
 
   // PRODUCTS
   getProducts = () => {
+    this.setState({ loading: true });
     axios
       .get("https://spamazon-ga-backend.herokuapp.com/api/products")
       .then(
-        (response) => this.setState({ products: response.data }),
+        (response) =>
+          this.setState({ products: response.data, loading: false }),
         (err) => console.error(err)
       )
       .catch((error) => console.error(error));
@@ -152,6 +158,7 @@ class App extends React.Component {
           updateProduct={this.updateProduct}
           deleteProduct={this.deleteProduct}
           user={this.state.user}
+          loading={this.state.loading}
         />
 
         <Footer />

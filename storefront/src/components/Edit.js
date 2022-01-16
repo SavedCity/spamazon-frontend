@@ -40,8 +40,8 @@ export default class Edit extends Component {
         {this.props.user.email === this.props.item.created_by ? (
           <details>
             <summary>
-              <span class="summary-title">Need to update?</span>
-              <div class="summary-chevron-up">
+              <span className="summary-title">Need to update?</span>
+              <div className="summary-chevron-up">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
