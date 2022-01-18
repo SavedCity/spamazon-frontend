@@ -39,6 +39,7 @@ class Products extends React.Component {
             deleteProduct={this.props.deleteProduct}
             activeProduct={this.state.activeProduct}
             liftStateToApp={this.props.liftStateToApp}
+            quantity={this.props.quantity}
           />
         ) : (
           <div className="loading-box">
@@ -48,7 +49,10 @@ class Products extends React.Component {
               <div></div>
               <div></div>
             </div>
-            <h1 className="loading-h1">Loading Spamazon Products</h1>
+            <h1 className="loading-h1">
+              Loading <span style={{ color: "#48cae4" }}>Spamazon</span>{" "}
+              Products
+            </h1>
           </div>
         )}
       </div>

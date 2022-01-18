@@ -5,9 +5,6 @@ import SignIn from "./SignIn";
 // import Checkout from "./Checkout";
 
 class Nav extends React.Component {
-  state = {
-    quantity: 1,
-  };
   // OPEN WARNIN' MODAL IF CLEAR CART BUTTON IS PRESSED
   openClearCartModal = () => {
     document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
@@ -41,6 +38,15 @@ class Nav extends React.Component {
     cartContent.classList.toggle("slide");
   };
 
+  closeModalWindow = (event) => {
+    let cartPopUp = document.getElementById("cart-popup");
+    let cartContent = document.getElementById("cart-content");
+    if (event.target === cartPopUp) {
+      cartPopUp.classList.toggle("show");
+      cartContent.classList.toggle("slide");
+    }
+  };
+
   // ===================== OPEN/CLOSE PROCEED TO CHECKOUT ====================
 
   openCheckout = () => {
@@ -62,8 +68,10 @@ class Nav extends React.Component {
     let cartTotal = this.props.sumOfCart;
     let cartArray = this.props.cartItems;
     let price =
-      event.target.parentElement.previousSibling.firstChild.nextSibling
-        .nextSibling.firstChild.nextSibling.firstChild.wholeText;
+      event.target.parentElement.previousSibling.firstChild.nextSibling.nextSibling.firstChild.nextSibling.firstChild.wholeText.replace(
+        /[$,]/g,
+        ""
+      );
     let id =
       event.target.parentElement.previousSibling.firstChild.firstChild
         .wholeText;
@@ -82,15 +90,12 @@ class Nav extends React.Component {
 
     this.props.showCartItems();
 
-    this.setState({});
+    this.props.quantity.push(numberId);
   };
 
   lowerQuantity = (event) => {
     let cartTotal = this.props.sumOfCart;
     let cartArray = this.props.cartItems;
-    // let price =
-    //   event.target.parentElement.previousSibling.firstChild.nextSibling
-    //     .nextSibling.firstChild.nextSibling.firstChild.wholeText;
 
     let id =
       event.target.parentElement.previousSibling.firstChild.firstChild
@@ -115,6 +120,15 @@ class Nav extends React.Component {
     cartTotal.push(sum);
 
     this.props.showCartItems();
+
+    let indexOfId = this.props.quantity.indexOf(
+      parseInt(event.target.previousSibling.id)
+    );
+    if (
+      this.props.quantity.includes(parseInt(event.target.previousSibling.id))
+    ) {
+      this.props.quantity.splice(indexOfId, 1);
+    }
   };
 
   // CLEARS THE SHOPPING CART
@@ -125,19 +139,17 @@ class Nav extends React.Component {
 
     cartSum.splice(0, cartSum.length);
     cartItems.splice(1, cartItems.length);
+    this.props.quantity.splice(0, this.props.quantity.length);
 
     this.props.showCartItems();
     this.openCart();
     this.props.triggerCartLimitReset();
-    console.log(cartItems);
   };
 
   openPostModal = () => {
-    setTimeout(() => {
-      document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
-      let modal = document.getElementById("create-form-modal");
-      modal.style.display = "block";
-    }, 250);
+    document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
+    let modal = document.getElementById("create-form-modal");
+    modal.style.display = "block";
   };
 
   addDefaultSrc = (ev) => {
@@ -179,7 +191,7 @@ class Nav extends React.Component {
       let logout = document.querySelector(".logout");
       let cart = document.querySelector(".fa-shopping-cart");
       let signin = document.querySelector("#signin-button");
-      let plus = document.querySelector(".fa-plus");
+      // let plus = document.querySelector(".fa-plus");
       let sell = document.querySelector(".sell-title");
       let user = document.querySelector(".username");
 
@@ -193,7 +205,7 @@ class Nav extends React.Component {
         signin.classList.remove("scroll");
 
         if (this.props.user) {
-          plus.classList.remove("scroll");
+          // plus.classList.remove("scroll");
           sell.classList.remove("scroll");
           user.classList.remove("scroll");
         }
@@ -206,7 +218,7 @@ class Nav extends React.Component {
         signin.classList.add("scroll");
 
         if (this.props.user) {
-          plus.classList.add("scroll");
+          // plus.classList.add("scroll");
           sell.classList.add("scroll");
           user.classList.add("scroll");
         }
@@ -214,7 +226,7 @@ class Nav extends React.Component {
     };
 
     return (
-      <div id="main" className="nav-bar">
+      <div onClick={this.closeModalWindow} id="main" className="nav-bar">
         <img className="logo-cart" src="../favicon.ico" alt="cart" />
 
         <h3 className="title">Spamazon</h3>
@@ -247,8 +259,10 @@ class Nav extends React.Component {
 
         {this.props.user && (
           <div className="sell-div">
-            <h2 className="sell-title">Have something to sell?</h2>
-            <i onClick={this.openPostModal} className="fas fa-plus"></i>
+            <h2 onClick={this.openPostModal} className="sell-title">
+              Sell Your Product
+            </h2>
+            {/* <i onClick={this.openPostModal} className="fas fa-plus"></i> */}
           </div>
         )}
 
@@ -263,15 +277,15 @@ class Nav extends React.Component {
         <div id="cart-popup">
           <div id="cart-content">
             {lengthOfCart > 1 ? (
-              <h2 className="cart-title">
-                <span style={{ color: "#0077b6" }}>Your cart </span> $
-                {lastSumofArray}.00
-              </h2>
+              <h2 className="cart-title">Your cart</h2>
             ) : (
               <h2 className="cart-title">Your cart is empty</h2>
             )}
 
             {unique.slice(1).map((item) => {
+              let quantity =
+                this.props.quantity.filter((id) => id === parseInt(item.id))
+                  .length + 1;
               return (
                 <div className="cart-item-div">
                   <div className="cart-item-div-left">
@@ -284,10 +298,25 @@ class Nav extends React.Component {
                     />
 
                     <div className="cart-details-div">
-                      <h1 className="cart-name">{item.name}</h1>
+                      <h1 className="cart-name">{item.name} </h1>
 
-                      <h2 className="cart-price">{item.price}</h2>
-                      <h1>{item.stock}</h1>
+                      <h2 className="cart-price">
+                        $
+                        {item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </h2>
+                      <h2
+                        style={{ fontSize: "1rem", color: "#0008" }}
+                        className="cart-price"
+                      >
+                        $
+                        {(item.price * quantity)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        .00
+                      </h2>
+                      {/* <h1>{item.stock}</h1> */}
                     </div>
                   </div>
                   <div className="arrows-div">
@@ -297,6 +326,15 @@ class Nav extends React.Component {
                       onClick={this.raiseQuantity}
                       className="fas fa-chevron-up"
                     ></i>
+                    <span
+                      style={{
+                        font: "600 1rem varela round",
+                        letterSpacing: "2px",
+                      }}
+                      id={item.id}
+                    >
+                      x{quantity}
+                    </span>
                     <i
                       title="Lower Quantity"
                       onClick={this.lowerQuantity}
@@ -309,7 +347,13 @@ class Nav extends React.Component {
             {lengthOfCart > 1 ? (
               <div className="cart-subtotal-div">
                 <h1 className="subtotal-in-cart">Subtotal </h1>
-                <h1 className="price-in-cart">${lastSumofArray}.00</h1>
+                <h1 className="price-in-cart">
+                  $
+                  {lastSumofArray
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  .00
+                </h1>
               </div>
             ) : null}
 
@@ -449,11 +493,27 @@ class Nav extends React.Component {
                                   <h1 className="checkout-name">{item.name}</h1>
                                 </div>
 
-                                <div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignContent: "center",
+                                    columnGap: "15px",
+                                  }}
+                                >
                                   <h2 className="checkout-price">
-                                    <span style={{ color: "#52b788" }}></span>
-                                    {item.price}
+                                    ${item.price}
                                   </h2>
+                                  <span
+                                    style={{
+                                      font: "600 1rem varela round",
+                                      margin: "17px 0",
+                                    }}
+                                  >
+                                    x
+                                    {this.props.quantity.filter(
+                                      (id) => id === parseInt(item.id)
+                                    ).length + 1}
+                                  </span>
                                 </div>
                               </div>
                             );
@@ -473,7 +533,11 @@ class Nav extends React.Component {
                           <div className="checkout-subtotal-div">
                             <h3 className="checkout-subtotal">Subtotal</h3>
                             <h3 className="checkout-subtotal-price">
-                              ${lastSumofArray}.00
+                              $
+                              {lastSumofArray
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                              .00
                             </h3>
                           </div>
                           <div className="checkout-taxes-div">
@@ -485,7 +549,11 @@ class Nav extends React.Component {
                           <div className="checkout-total-div">
                             <h3 className="checkout-total">Total</h3>
                             <h3 className="checkout-total-price">
-                              ${lastSumofArray}.00
+                              $
+                              {lastSumofArray
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                              .00
                             </h3>
                           </div>
                         </div>
@@ -514,7 +582,32 @@ class Nav extends React.Component {
                       return (
                         <div>
                           <h4 className="clear-cart-name">{item.name}</h4>
-                          <p className="clear-cart-price">{item.price}</p>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignContent: "center",
+                              columnGap: "15px",
+                              borderBottom: "1px solid #0003",
+                              marginBottom: "7px",
+                            }}
+                          >
+                            <p className="clear-cart-price">
+                              {item.price
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                            </p>
+                            <span
+                              style={{
+                                font: "600 1rem varela round",
+                                margin: "13px 0",
+                              }}
+                            >
+                              x
+                              {this.props.quantity.filter(
+                                (id) => id === parseInt(item.id)
+                              ).length + 1}
+                            </span>
+                          </div>
                         </div>
                       );
                     })}

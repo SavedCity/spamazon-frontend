@@ -17,6 +17,7 @@ class App extends React.Component {
     sumOfCart: [],
     checkoutOpenedOnce: false,
     cartLimit: 0,
+    quantity: [],
   };
 
   // CART
@@ -135,6 +136,7 @@ class App extends React.Component {
           user={this.state.user}
           showCartItems={this.showCartItems}
           logOut={this.logOut}
+          quantity={this.state.quantity}
         />
 
         <UnderNav user={this.state.user} products={this.state.products} />
@@ -159,6 +161,7 @@ class App extends React.Component {
           deleteProduct={this.deleteProduct}
           user={this.state.user}
           loading={this.state.loading}
+          quantity={this.state.quantity}
         />
 
         <Footer />

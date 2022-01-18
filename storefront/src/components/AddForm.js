@@ -41,17 +41,13 @@ export default class AddForm extends Component {
       created_by: "",
     });
     document.getElementById("form-image").src = "";
-    setTimeout(() => {
-      this.closePostModal();
-    }, 0);
+    this.closePostModal();
   };
 
   closePostModal = () => {
-    setTimeout(() => {
-      document.getElementsByTagName("BODY")[0].style.overflow = "auto";
-      let modal = document.getElementById("create-form-modal");
-      modal.style.display = "none";
-    }, 250);
+    document.getElementsByTagName("BODY")[0].style.overflow = "auto";
+    let modal = document.getElementById("create-form-modal");
+    modal.style.display = "none";
   };
 
   addDefaultSrc = (ev) => {
@@ -72,7 +68,7 @@ export default class AddForm extends Component {
                     <label htmlFor="price">Price</label>
                     <input
                       min="1"
-                      placeholder="Price *"
+                      placeholder="Price"
                       required
                       type="number"
                       id="price"
@@ -83,7 +79,7 @@ export default class AddForm extends Component {
                   <div>
                     <label htmlFor="image">Image</label>
                     <input
-                      placeholder="Image URL *"
+                      placeholder="Image URL"
                       required
                       type="text"
                       id="image"
@@ -93,21 +89,21 @@ export default class AddForm extends Component {
                     />
                   </div>
                 </div>
-                <label htmlFor="title">Title</label>
+                <label htmlFor="name">Title</label>
                 <input
-                  placeholder="Title *"
+                  placeholder="Title"
                   title="Must be between 5-64 characters long"
                   required
                   pattern="[a-zA-Z\W0-9]{5,64}"
                   type="text"
-                  id="title"
+                  id="name"
                   onChange={this.handleChange}
                   value={this.state.name}
                 />
 
                 <label htmlFor="description">Description</label>
                 <textarea
-                  placeholder="Brief description of the product you are selling with Spamazon *"
+                  placeholder="Brief description of your product"
                   title="Length must not exceed 300 characters"
                   pattern="[a-zA-Z\W0-9]{0,300}"
                   type="text"
@@ -127,11 +123,12 @@ export default class AddForm extends Component {
                   type="submit"
                   value="SUBMIT PRODUCT"
                 />
+                <button className="post-back" onClick={this.closePostModal}>
+                  CANCEL
+                </button>
               </div>
             </form>
-            <button className="post-back" onClick={this.closePostModal}>
-              CANCEL
-            </button>
+
             <h3 className="preview-title">IMAGE PREVIEW</h3>
 
             <h1>Sell something great!</h1>

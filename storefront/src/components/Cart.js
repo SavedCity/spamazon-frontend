@@ -43,11 +43,12 @@ class Cart extends React.Component {
 
     this.props.showCartItems();
     this.props.triggerCartLimitUp();
-    console.log(this.props.cartLimit);
 
     this.setState({
       addToCartClick: true,
     });
+    console.log("cartArray", cartArray);
+    console.log("cartTotal", cartTotal);
   };
 
   // ============================== REMOVE ITEM FROM THE CART =================================
@@ -57,23 +58,26 @@ class Cart extends React.Component {
     let cartTotal = this.props.sumOfCart;
     let numberId = parseInt(id);
 
+    this.setState({
+      addToCartClick: false,
+    });
+
     let itemToRemoveIndex = cartArray.findIndex(function (item) {
       return item.id === id;
     });
 
-    let itemToRemoveIndex2 = cartArray.findIndex(function (item) {
-      return item.numberId === numberId;
-    });
-
-    if (itemToRemoveIndex2 !== -1) {
-      cartArray.splice(itemToRemoveIndex2, cartArray.length);
+    // search cartArray for 'numberId' matching the product and remove all the ones that match
+    for (let i = 0; i < cartArray.length; i++) {
+      if (cartArray[i].numberId === numberId) {
+        cartArray.splice(i, 1);
+        i--;
+      }
     }
+
     // PROCEED TO REMOVE ITEM ONLY IF IT EXISTS
     if (itemToRemoveIndex !== -1) {
       cartArray.splice(itemToRemoveIndex, 1);
     }
-
-    console.log(itemToRemoveIndex);
 
     // ADDING THE PRICES IN THE CART AFTER REMOVAL OF ONE
     var sum = cartArray.reduce((previousValue, currentValue) => {
@@ -87,11 +91,12 @@ class Cart extends React.Component {
     this.props.showCartItems();
     this.props.triggerCartLimitDown();
 
-    console.log(cartArray);
-
-    this.setState({
-      addToCartClick: false,
-    });
+    for (let i = 0; i <= this.props.quantity.length; i++) {
+      if (this.props.quantity.includes(numberId)) {
+        i = this.props.quantity.indexOf(parseInt(numberId));
+        this.props.quantity.splice(i, 1);
+      }
+    }
   };
 
   render = () => {

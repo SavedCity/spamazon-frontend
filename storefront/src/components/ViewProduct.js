@@ -49,9 +49,25 @@ class ViewProduct extends React.Component {
                       width: "70%",
                     }}
                   >
-                    <h2 className="item-name"> {item.name} </h2>
+                    <div className="item-name-box">
+                      <h2
+                        className={
+                          item.name.length > 23
+                            ? "item-name scroll-words"
+                            : "item-name"
+                        }
+                      >
+                        {" "}
+                        {item.name}{" "}
+                      </h2>
+                    </div>
 
-                    <h2 className="item-price">${item.price} </h2>
+                    <h2 className="item-price">
+                      $
+                      {item.price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                    </h2>
 
                     <Cart
                       triggerCartLimitDown={this.props.triggerCartLimitDown}
@@ -63,6 +79,7 @@ class ViewProduct extends React.Component {
                       showCartItems={this.props.showCartItems}
                       cartItems={this.props.cartItems}
                       cartLimit={this.props.cartLimit}
+                      quantity={this.props.quantity}
                     />
                   </div>
                   {this.props.user ? (
