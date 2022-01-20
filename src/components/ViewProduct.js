@@ -50,16 +50,7 @@ class ViewProduct extends React.Component {
                     }}
                   >
                     <div className="item-name-box">
-                      <h2
-                        className={
-                          item.name.length > 23
-                            ? "item-name scroll-words"
-                            : "item-name"
-                        }
-                      >
-                        {" "}
-                        {item.name}{" "}
-                      </h2>
+                      <h2 className="item-name"> {item.name} </h2>
                     </div>
 
                     <h2 className="item-price">
